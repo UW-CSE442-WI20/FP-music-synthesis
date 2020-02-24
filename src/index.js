@@ -1,5 +1,3 @@
-
-
 // You can require libraries
 const d3 = require('d3')
 
