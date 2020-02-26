@@ -1,11 +1,65 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>My Title</title>
-  </head>
-  <body>
-    <h1>My Webpage</h1>
-    <script src="./index.js"></script>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Synthesis</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/collapse.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+<div class="container" style="margin-top: 2vh">
+  <h2 style="text-align: center">Synthesis</h2>
+
+  <div class="row">
+    <button class="accordion">Keyboard</button>
+    <div class="panel">
+      <p>keyboard will go here</p>
+    </div>
+
+    <button class="accordion">Waves</button>
+    <div class="panel">
+      <p>waves will go here</p>
+    </div>
+  </div>
+
+  <div id="mySidebar" class="sidebar" onmouseover="toggleSidebar()" onmouseout="toggleSidebar()">
+    <a class="tablink" onclick="openPage('home')" id="defaultOpen"><span><i class="material-icons">home</i><span class="icon-text">home</span></a><br>
+    <a class="tablink" onclick="openPage('oscillators')"><i class="material-icons">waves</i><span class="icon-text"></span>oscillators</a></span></a><br>
+    <a class="tablink" onclick="openPage('envelopes')"><i class="material-icons">mail_outline</i><span class="icon-text"></span>envelopes</span></a><br>
+    <a class="tablink" onclick="openPage('filters')"><i class="material-icons">filter_none</i><span class="icon-text"></span>filters<span></a>
+  </div>
+
+  <div id="home" class="tabcontent">
+    <h3>Home</h3>
+    <p>Home is where the heart is..</p>
+  </div>
+
+  <div id="oscillators" class="tabcontent">
+    <h3>Oscillators</h3>
+    <p>Sound</p>
+  </div>
+
+  <div id="envelopes" class="tabcontent">
+    <h3>Envelopes</h3>
+    <p>Behaviour</p>
+  </div>
+
+  <div id="filters" class="tabcontent">
+    <h3>Filters</h3>
+    <p>Echhooooo</p>
+  </div>
+</div>
+
+<script src="./index.js"></script>
+
+</body>
 </html>
