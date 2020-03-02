@@ -46,9 +46,10 @@ function openPage(pageName) {
     }
     document.getElementById(pageName).style.display = "block";
 }
-document.getElementById("defaultOpen").click();
 
-(function() {
+$(document).ready(function() {
+  document.getElementById("defaultOpen").click();
+
   // Horizontal Collapsible
   var acc = document.getElementsByClassName("accordion");
   var i;
@@ -64,4 +65,4 @@ document.getElementById("defaultOpen").click();
       }
     });
   }
-})();
+});
