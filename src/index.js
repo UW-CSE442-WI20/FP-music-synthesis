@@ -38,6 +38,7 @@ function toggleSidebar() {
 
 // Pages
 function openPage(pageName) {
+  console.log
     var i, tabcontent;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -47,18 +48,20 @@ function openPage(pageName) {
 }
 document.getElementById("defaultOpen").click();
 
-// Horizontal Collapsible
-var acc = document.getElementsByClassName("accordion");
-var i;
+(function() {
+  // Horizontal Collapsible
+  var acc = document.getElementsByClassName("accordion");
+  var i;
 
-for (i = 0; i < acc.length; i++) {
+  for (i = 0; i < acc.length; i++) {
     acc[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.maxHeight) {
-            panel.style.maxHeight = null;
-        } else {
-            panel.style.maxHeight = panel.scrollHeight + "px";
-        }
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
     });
-}
+  }
+})();
