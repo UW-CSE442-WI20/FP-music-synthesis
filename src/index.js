@@ -1,6 +1,5 @@
 import * as Tone from "tone";
 const d3 = require('d3')
-import $ from 'jquery'
 
 // Sidebar
 var mini = true;
@@ -74,7 +73,7 @@ function initEnvelope() {
   });
 }
 
-$(document).ready(function() {
+document.addEventListener("DOMContentLoaded", function() {
   var sidebar = d3.select("#mySidebar");
   sidebar
     .on("mouseenter", toggleSidebar)
