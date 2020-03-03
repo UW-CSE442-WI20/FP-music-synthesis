@@ -1,6 +1,7 @@
 // Import Tone
 import * as Tone from "tone";
 const d3 = require('d3');
+import $ from 'jquery'
 
 const keyboard = d3.select("#keyboard-root");
 
@@ -49,7 +50,7 @@ const notemap_white = [
 const notemap_black = [
   'Db4', 'Eb4', '', 'Gb4', 'Ab4', 'Bb4', '',
   'Db5', 'Eb5', '', 'Gb5', 'Ab5', 'Bb5', '',
-  'Db6', 'Eb6', '', 'Gb6', 'Ab6', 'Bb6', '',
+  'Db6', 'Eb6', '', 'Gb6', 'Ab6', 'Bb6', ''
 ];
 
 // create map to store keyboard events for specific keys
@@ -83,12 +84,12 @@ d3.select("body")
 
 for (let i = 0; i < notemap_white.length; i++) {
   //set (piano) keyboard events
-  keyboard_event_on[notemap_white[i]] = function () {
+  keyboard_event_on[notemap_white[i]] = function() {
     synth.triggerRelease();
     synth.triggerAttack(notemap_white[i]);
     d3.select("#" + notemap_white[i]).attr("class", "white-down white key");
   };
-  keyboard_event_off[notemap_white[i]] = function () {
+  keyboard_event_off[notemap_white[i]] = function() {
     synth.triggerRelease();
     d3.select("#" + notemap_white[i]).attr("class", "white key");
   };
@@ -106,11 +107,11 @@ for (let i = 0; i < notemap_black.length; i++) {
     continue;
   }
   //set (piano) keyboard events
-  keyboard_event_on[notemap_black[i]] = function () {
+  keyboard_event_on[notemap_black[i]] = function() {
     synth.triggerAttack(notemap_black[i]);
     d3.select("#" + notemap_black[i]).attr("class", "black-down black key");
   };
-  keyboard_event_off[notemap_black[i]] = function () {
+  keyboard_event_off[notemap_black[i]] = function() {
     synth.triggerRelease();
     d3.select("#" + notemap_black[i]).attr("class", "black key");
   };
@@ -134,9 +135,9 @@ for (let i = 0; i < keys_white; i++) {
     .attr("id", notemap_white[i])
     .on("mousedown", keyboard_event_on[notemap_white[i]])
     .on("mouseup", keyboard_event_off[notemap_white[i]])
-      .append("div")
-      .attr("class", "label")
-      .text(keymap_white[i]);
+    .append("div")
+    .attr("class", "label")
+    .text(keymap_white[i]);
 }
 
 // create black keys
@@ -157,9 +158,9 @@ for (let i = 0; i < keys_white; i++) {
       .style("left", offset + "px")
       .on("mousedown", keyboard_event_on[notemap_black[i]])
       .on("mouseup", keyboard_event_off[notemap_black[i]])
-        .append("div")
-        .attr("class", "label")
-        .text(keymap_black[i]);
+      .append("div")
+      .attr("class", "label")
+      .text(keymap_black[i]);
 
     //update offset
     offset += white_width;
