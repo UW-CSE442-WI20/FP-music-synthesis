@@ -21,7 +21,7 @@ body {
 .white:hover {
     background-color: hsl(0, 0%, 95%);
 }
-.white:active {
+.white.white-down {
     background-color: hsl(0, 0%, 90%);
 }
 
@@ -33,7 +33,7 @@ body {
 .black:hover {
     background-color: hsl(0, 0%, 15%);
 }
-.black:active{
+.black.black-down{
     background-color: hsl(0, 0%, 20%);
 }
 
@@ -49,4 +49,5 @@ body {
     bottom: 10px;
     left: 0;
     right: 0;
+    user-select: none;
 }
