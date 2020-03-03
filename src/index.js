@@ -1,6 +1,6 @@
 // GIVEN STUFF IN TEMPLATE
 // // You can require libraries
-// const d3 = require('d3')
+const d3 = require('d3')
 //
 // // You can include local JS files:
 // const MyClass = require('./my-class');
@@ -24,28 +24,37 @@
 // Sidebar
 var mini = true;
 
+var sidebar = d3.select("#mySidebar");
+sidebar
+    .on("mouseenter", toggleSidebar)
+    .on("mouseleave", toggleSidebar);
+
 function toggleSidebar() {
     if (mini) {
-        console.log("opening sidebar");
         document.getElementById("mySidebar").style.width = "275px";
-        this.mini = false;
+        mini = false;
     } else {
-        console.log("closing sidebar");
         document.getElementById("mySidebar").style.width = "85px";
-        this.mini = true;
+        mini = true;
     }
 }
 
+var links = d3.selectAll(".tablink");
+links.on("click", function() {
+    openPage(this.id);
+});
+
 // Pages
 function openPage(pageName) {
+    console.log("opening page", pageName);
     var i, tabcontent;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
     }
-    document.getElementById(pageName).style.display = "block";
+    document.getElementById(pageName + "-tab").style.display = "block";
 }
-document.getElementById("defaultOpen").click();
+openPage("home");
 
 // Horizontal Collapsible
 var acc = document.getElementsByClassName("accordion");
