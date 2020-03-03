@@ -60,25 +60,31 @@ const keyboard_event_off = {};
 // link keyboard shortcuts
 const key_map = {};
 
+// TODO: create queue system so that we don't sustain and release when we don't want to
+var keys_down = 0;
+
 d3.select("body")
     .on("keydown", () => {
         let cur_key = key_map[d3.event.key];
         if (cur_key && !cur_key.down) {
-            cur_key.func_down();
             cur_key.down = true;
+            keys_down++;
+            cur_key.func_down();
         }
     })
     .on("keyup", () => {
         let cur_key = key_map[d3.event.key];
         if (cur_key && cur_key.down) {
-            cur_key.func_up();
             cur_key.down = false;
+            keys_down--;
+            cur_key.func_up();
         }
     });
 
 for (let i = 0; i < notemap_white.length; i++) {
     //set (piano) keyboard events
     keyboard_event_on[notemap_white[i]] = function() {
+        synth.triggerRelease();
         synth.triggerAttack(notemap_white[i]);
         d3.select("#" + notemap_white[i]).attr("class", "white-down white key");
     };
