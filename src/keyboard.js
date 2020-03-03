@@ -1,6 +1,8 @@
 // Import Tone
-import * as Tone from "tone";
 const d3 = require('d3');
+
+const synthMaster = require('./synth.js');
+const synth = synthMaster.synth;
 
 const keyboard = d3.select("#keyboard-root");
 
@@ -20,8 +22,6 @@ const black_height = black_ratio_h * height;
 
 const white_width = width / keys_white;
 const black_width = white_width * black_ratio_w;
-
-const synth = new Tone.Synth().toMaster();
 
 keyboard
   .style("height", height + "px")
