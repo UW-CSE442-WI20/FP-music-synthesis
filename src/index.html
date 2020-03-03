@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="css/skeleton.css">
   <link rel="stylesheet" href="css/collapse.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <link rel="stylesheet" type="text/css" href="keyboard.css">
 </head>
 
 <body>
@@ -22,7 +24,7 @@
   <div class="row">
     <button class="accordion">Keyboard</button>
     <div class="panel">
-      <p>keyboard will go here</p>
+      <div id="keyboard-root"></div>
     </div>
 
     <button class="accordion">Waves</button>
@@ -31,47 +33,48 @@
     </div>
   </div>
 
-  <div id="mySidebar" class="sidebar" onmouseover="toggleSidebar()" onmouseout="toggleSidebar()">
-    <a class="tablink" onclick="openPage('home')" id="defaultOpen"><span><i class="material-icons">home</i><span class="icon-text">home</span></a><br>
-    <a class="tablink" onclick="openPage('sound waves')" id="defaultOpen"><span><i class="material-icons">waves</i><span class="icon-text">sound waves</span></a><br>
-    <a class="tablink" onclick="openPage('pitch')" id="defaultOpen"><span><i class="material-icons">filter_list</i><span class="icon-text">pitch</span></a><br>
-    <a class="tablink" onclick="openPage('oscillators')"><i class="material-icons">calendar_view_day</i><span class="icon-text"></span>oscillators</a></span></a><br>
-    <a class="tablink" onclick="openPage('envelopes')"><i class="material-icons">graphic_eq</i><span class="icon-text"></span>envelopes</span></a><br>
-    <a class="tablink" onclick="openPage('filters')"><i class="material-icons">filter_none</i><span class="icon-text"></span>filters<span></a>
+  <div id="mySidebar" class="sidebar">
+    <a class="tablink" id="home"><span><i class="material-icons">home</i><span class="icon-text">home</span></a><br>
+    <a class="tablink" id="sound-waves"><span><i class="material-icons">waves</i><span class="icon-text">sound waves</span></a><br>
+    <a class="tablink" id="pitch"><span><i class="material-icons">filter_list</i><span class="icon-text">pitch</span></a><br>
+    <a class="tablink" id="oscillators"><i class="material-icons">calendar_view_day</i><span class="icon-text"></span>oscillators</a></span></a><br>
+    <a class="tablink" id="envelopes"><i class="material-icons">graphic_eq</i><span class="icon-text"></span>envelopes</span></a><br>
+    <a class="tablink" id="filters"><i class="material-icons">filter_none</i><span class="icon-text"></span>filters<span></a>
   </div>
 
-  <div id="home" class="tabcontent">
+  <div id="home-tab" class="tabcontent">
     <h3>Home</h3>
     <p>Home is where the heart is..</p>
   </div>
 
-  <div id="sound waves" class="tabcontent">
+  <div id="sound-waves-tab" class="tabcontent">
     <h3>Sound Waves</h3>
     <p>we love physics</p>
   </div>
 
-  <div id="pitch" class="tabcontent">
+  <div id="pitch-tab" class="tabcontent">
     <h3>Pitch</h3>
     <p>baseball</p>
   </div>
 
-  <div id="oscillators" class="tabcontent">
+  <div id="oscillators-tab" class="tabcontent">
     <h3>Oscillators</h3>
     <p>Sound</p>
   </div>
 
-  <div id="envelopes" class="tabcontent">
+  <div id="envelopes-tab" class="tabcontent">
     <h3>Envelopes</h3>
-    <p>Behaviour</p>
+    <p>Behavior</p>
   </div>
 
-  <div id="filters" class="tabcontent">
+  <div id="filters-tab" class="tabcontent">
     <h3>Filters</h3>
     <p>Echhooooo</p>
   </div>
 </div>
 
 <script src="./index.js"></script>
-
+<script src="./keyboard.js"></script>
 </body>
+
 </html>
