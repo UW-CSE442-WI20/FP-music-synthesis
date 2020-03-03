@@ -24,9 +24,9 @@ function openPage(pageName) {
   document.getElementById(pageName + "-tab").style.display = "block";
 }
 
-function getEnvelopeCurve(t, callback) {
-  const n = t.attack + t.decay + t.release;
-  const params = t.get();
+function getEnvelopeCurve(envl, callback) {
+  const n = envl.attack + envl.decay + envl.release;
+  const params = envl.get();
 
   // Simulate envelope to get curve data
   Tone.Offline(() => {
@@ -45,30 +45,35 @@ function getEnvelopeCurve(t, callback) {
 function initEnvelope() {
   var envl = new Tone.Envelope().toMaster();
 
-  // set the dimensions and margins of the graph
-  var margin = {top: 10, right: 30, bottom: 30, left: 60},
-      width = 460 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
-
-  // append the svg object to the body of the page
-  var svg = d3.select("#envelope-viz")
-      .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-      .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-
-  // TODO: x limit should be updated dynamically
-  var length = envl.attack + envl.decay + envl.release;
-  var xAxis = d3.scaleLinear().range([0, length]);
-  var yAxis = d3.scaleLinear().range([0, 1]);
-  var line = d3.line()
-      .x(d => xScale(d.time))
-      .y(d => yScale(d.value))
-      .curve(d3.curveLinear)
-
   getEnvelopeCurve(envl, function(points) {
+    // Set the dimensions and margins of the graph
+    var margin = {top: 10, right: 30, bottom: 30, left: 60};
+    var width = 460 - margin.left - margin.right;
+    var height = 150 - margin.top - margin.bottom;
+
+    // Append the svg object to the body of the page
+    var svg = d3.select("#envelope-viz")
+	.append("svg")
+	.attr("width", width + margin.left + margin.right)
+	.attr("height", height + margin.top + margin.bottom)
+	.append("g")
+	.attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")");
+
+    // TODO: x limit should be updated dynamically
+    var length = envl.attack + envl.decay + envl.release;
+    var x = d3.scaleLinear().domain([0, points.length]).range([0, width]);
+    var y = d3.scaleLinear().domain([1, 0]).range([0, height]);
+    var line = d3.line()
+	.x((d, i) => x(i))
+	.y(d => y(d))
+
+    svg.append("path")
+      .attr("fill", "none")
+      .attr("stroke", "black")
+      .attr("stroke-width", 1.5)
+      .attr("d", line(points))
+
     console.log(points);
   });
 }
