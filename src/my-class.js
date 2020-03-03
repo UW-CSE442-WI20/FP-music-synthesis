@@ -5,7 +5,6 @@
 
 class MyClass {
   constructor() {
-
   }
 
   sayHi() {
