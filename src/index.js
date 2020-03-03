@@ -1,6 +1,9 @@
 // GIVEN STUFF IN TEMPLATE
 // // You can require libraries
-// const d3 = require('d3')
+import * as Tone from "tone";
+const d3 = require('d3')
+import $ from 'jquery'
+
 //
 // // You can include local JS files:
 // const MyClass = require('./my-class');
@@ -26,43 +29,40 @@ var mini = true;
 
 function toggleSidebar() {
     if (mini) {
-        console.log("opening sidebar");
         document.getElementById("mySidebar").style.width = "275px";
-        this.mini = false;
+        mini = false;
     } else {
-        console.log("closing sidebar");
         document.getElementById("mySidebar").style.width = "85px";
-        this.mini = true;
+        mini = true;
     }
 }
 
 // Pages
 function openPage(pageName) {
-  console.log
     var i, tabcontent;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
     }
-    document.getElementById(pageName).style.display = "block";
+    document.getElementById(pageName + "-tab").style.display = "block";
 }
 
-
-async function getEnvelopeCurve(t) {
+function getEnvelopeCurve(t, callback) {
   const n = t.attack + t.decay + t.release;
   const params = t.get();
 
   // Simulate envelope to get curve data
-  const points = await Tone.Offline(() => {
+  Tone.Offline(() => {
     const dummy = new Tone.Envelope;
     dummy.set(params);
     dummy.attack *= 1, dummy.decay *= 1, dummy.release *= 1;
     dummy.toMaster();
     dummy.triggerAttack(.001);
     dummy.triggerRelease(1 * (dummy.attack + dummy.decay + .01) + .001);
-  }, 1 * (n + .01) + .002);
-
-  return points.toArray(0);
+  }, 1 * (n + .01) + .002).then(function(d) {
+    var points = d.toArray(0);
+    callback(points);
+  });
 }
 
 function initEnvelope() {
@@ -86,19 +86,28 @@ function initEnvelope() {
   var length = envl.attack + envl.decay + envl.release;
   var xAxis = d3.scaleLinear().range([0, length]);
   var yAxis = d3.scaleLinear().range([0, 1]);
-  line = d3.line()
+  var line = d3.line()
     .x(d => xScale(d.time))
     .y(d => yScale(d.value))
     .curve(d3.curveLinear)
 
-  getEnvelopeCurve(envl).then(function(d) {
-    // TODO: Push these points to a plot
+  getEnvelopeCurve(envl, function(points) {
     console.log(points);
   });
 }
 
 $(document).ready(function() {
-  document.getElementById("defaultOpen").click();
+  var sidebar = d3.select("#mySidebar");
+  sidebar
+    .on("mouseenter", toggleSidebar)
+    .on("mouseleave", toggleSidebar);
+
+  var links = d3.selectAll(".tablink");
+  links.on("click", function() {
+    openPage(this.id);
+  });
+
+  openPage("home");
 
   // Horizontal Collapsible
   var acc = document.getElementsByClassName("accordion");
