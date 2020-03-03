@@ -6,23 +6,23 @@ import $ from 'jquery'
 var mini = true;
 
 function toggleSidebar() {
-    if (mini) {
-        document.getElementById("mySidebar").style.width = "275px";
-        mini = false;
-    } else {
-        document.getElementById("mySidebar").style.width = "85px";
-        mini = true;
-    }
+  if (mini) {
+    document.getElementById("mySidebar").style.width = "275px";
+    mini = false;
+  } else {
+    document.getElementById("mySidebar").style.width = "85px";
+    mini = true;
+  }
 }
 
 // Pages
 function openPage(pageName) {
-    var i, tabcontent;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    document.getElementById(pageName + "-tab").style.display = "block";
+  var i, tabcontent;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  document.getElementById(pageName + "-tab").style.display = "block";
 }
 
 function getEnvelopeCurve(t, callback) {
@@ -65,9 +65,9 @@ function initEnvelope() {
   var xAxis = d3.scaleLinear().range([0, length]);
   var yAxis = d3.scaleLinear().range([0, 1]);
   var line = d3.line()
-    .x(d => xScale(d.time))
-    .y(d => yScale(d.value))
-    .curve(d3.curveLinear)
+      .x(d => xScale(d.time))
+      .y(d => yScale(d.value))
+      .curve(d3.curveLinear)
 
   getEnvelopeCurve(envl, function(points) {
     console.log(points);
