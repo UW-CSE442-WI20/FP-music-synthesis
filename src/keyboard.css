@@ -51,3 +51,12 @@ body {
     right: 0;
     user-select: none;
 }
+
+#fft-root, #waveform-root {
+    fill: none;
+    stroke: black;
+    stroke-width: 1.5;
+    
+    margin: 0 auto 0 auto;
+    border: 1px solid black;
+}

@@ -3,6 +3,8 @@ const d3 = require('d3');
 
 const synthMaster = require('./synth.js');
 const synth = synthMaster.synth;
+const fft = synthMaster.fft;
+const waveform = synthMaster.waveform;
 
 const keyboard = d3.select("#keyboard-root");
 
@@ -10,10 +12,10 @@ const keyboard = d3.select("#keyboard-root");
 
 // width and height of entire keyboard
 const width = 800;
-const height = 300;
+const height = 150;
 
 // 1 Octave: 8 keys (C-C), 2 groups
-const octaves = 2;                  // num of octaves
+const octaves = 3;                  // num of octaves
 const keys_white = 7 * octaves + 1; // num of white keys
 
 const black_ratio_w = .8;       // ratio of width of black keys to width of white keys
@@ -165,3 +167,79 @@ for (let i = 0; i < keys_white; i++) {
     offset += white_width;
   }
 }
+
+// ---------------------
+// --- DRAW ANALYZER ---
+// ---------------------
+
+//
+// draw chart
+var HEIGHT = 60,
+    WIDTH = 800;
+
+// fft
+//
+svg_fft = d3.select('#fft-root')
+            .append('svg')
+            .attr('height', HEIGHT)
+            .attr('width', WIDTH);
+
+// create scales
+x_fft = d3.scaleLinear()
+          .domain([0, fft.size-1])
+          .range([0, WIDTH]);
+
+y_fft = d3.scaleLinear()
+          .domain([-190, -10])
+          .range([HEIGHT, 0]);
+
+// create line generator 
+var line_fft = d3.line()
+                .x(function(d,i) {return x_fft(i);})
+                .y(function(d) {return y_fft(d);});
+
+// add the path directly to the svg and draw the data directly
+svg_fft.append("path")
+  .attr("d", line_fft(fft.getValue()));
+
+// draw wave stuff
+svg_wave = d3.select('#waveform-root')
+            .append('svg')
+            .attr('height', HEIGHT)
+            .attr('width', WIDTH);
+
+// create scales
+x_wave = d3.scaleLinear()
+            .domain([0, waveform.size-1])
+            .range([0, WIDTH]);
+
+y_wave = d3.scaleLinear()
+            .domain([-1, 1])
+            .range([0, HEIGHT]);
+
+// create line generator 
+var line_wave = d3.line()
+                  .x(function(d,i) {return x_wave(i);})
+                  .y(function(d) {return y_wave(d);});
+                  
+// add path directly to the svg and draw the data directly
+svg_wave.append("path")
+        .attr("d", line_wave(waveform.getValue()));
+
+// update visualizations using requestAnimateFrame
+function renderChart() {
+  requestAnimationFrame(renderChart);
+
+  // get fft data and update plot
+  svg_fft.selectAll("path")
+          .attr("d", line_fft(fft.getValue()));
+
+  // get wave data and update plot
+  svg_wave.selectAll("path")
+          .attr("d", line_wave(waveform.getValue()));
+
+  //console.log(waveform.getValue())
+}
+
+// Begin animation
+renderChart();
