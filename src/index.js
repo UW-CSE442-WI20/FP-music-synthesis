@@ -6,22 +6,18 @@ var mini = true;
 
 function toggleSidebar() {
   if (mini) {
-    document.getElementById("mySidebar").style.width = "275px";
+    d3.select("#mySidebar").style("width", "275px");
     mini = false;
   } else {
-    document.getElementById("mySidebar").style.width = "85px";
+    d3.select("#mySidebar").style("width", "85px");
     mini = true;
   }
 }
 
 // Pages
 function openPage(pageName) {
-  var i, tabcontent;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  document.getElementById(pageName + "-tab").style.display = "block";
+  d3.selectAll(".tabcontent").style("display", "none");
+  d3.select("#" + pageName + "-tab").style("display", "block");
 }
 
 function getEnvelopeCurve(envl, callback) {
@@ -90,11 +86,8 @@ document.addEventListener("DOMContentLoaded", function() {
   openPage("home");
 
   // Horizontal Collapsible
-  var acc = document.getElementsByClassName("accordion");
-  var i;
-
-  for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function() {
+  d3.selectAll(".accordion")
+    .on("click", function () {
       this.classList.toggle("active");
       var panel = this.nextElementSibling;
       if (panel.style.maxHeight) {
@@ -102,8 +95,7 @@ document.addEventListener("DOMContentLoaded", function() {
       } else {
         panel.style.maxHeight = panel.scrollHeight + "px";
       }
-    });
-  }
+    })
 
   // Envelope
   initEnvelope();
