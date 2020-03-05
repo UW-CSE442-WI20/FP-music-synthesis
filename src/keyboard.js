@@ -1,6 +1,5 @@
 // Import Tone
 const d3 = require('d3');
-import $ from 'jquery'
 
 const synthMaster = require('./synth.js');
 const synth = synthMaster.synth;
