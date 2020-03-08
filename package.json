@@ -9,13 +9,25 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
+  "babel": {
+    "plugins": [
+      [
+        "@babel/plugin-proposal-class-properties",
+        {
+          "loose": true
+        }
+      ]
+    ]
+  },
   "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.8.7",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-static-files-copy": "^2.3.1"
   },
   "dependencies": {
     "d3": "^5.15.0",
-    "jquery": "^3.4.1",
     "tone": "^13.8.25"
   }
 }
