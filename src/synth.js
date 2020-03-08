@@ -4,7 +4,7 @@ const d3 = require('d3');
 
 var fft = new Tone.FFT();
 var waveform = new Tone.Waveform();
-var synth = new Tone.Synth().chain(fft, waveform, Tone.Master);
+var synth = new Tone.PolySynth().chain(fft, waveform, Tone.Master);
 
 // -----------------
 // -- OSCILLATORS --

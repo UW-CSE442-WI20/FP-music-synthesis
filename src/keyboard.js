@@ -62,64 +62,6 @@ const keyboard_event_off = {};
 // link keyboard shortcuts
 const key_map = {};
 
-class KeyNode {
-  key;
-  prev = null;
-  next = null;;
-  constructor(key, prev, next) {
-    this.key = key;
-    this.prev = prev;
-    this.next = next;
-  }
-};
-
-class KeyQueue {
-
-  constructor() {
-    this.key_set = new Map(); // set to hold keys
-    this.tail = null;
-  }
-
-  get size() {
-    return this.key_set.size;
-  }
-
-  // add key to the KeyQueue
-  add(key) {
-    this.remove(key);
-    let obj = new KeyNode(key, this.tail, null);
-    if (this.tail != null) {
-      this.tail.next = obj;
-    }
-    this.key_set.set(key, obj);
-    this.tail = obj;
-  }
-
-  // remove key from KeyQueue, returns tail afterwards if tail is what is removed
-  remove(key) {
-    let node = this.key_set.get(key);
-    if (node != undefined) { //is the key exists in set, join prev to next when appropriate and delete
-      if (node.prev != null) {
-        node.prev.next = node.next;
-      }
-      if (node.next != null) {
-        node.next.prev = node.prev;
-      }
-      this.key_set.delete(key);
-    }
-    if (node === this.tail) {
-      this.tail = this.tail.prev;
-      if (this.tail != null) {
-        this.tail.next = null;
-        return this.tail.key;
-      }
-    }
-    return null;
-  }
-}
-
-const key_set = new KeyQueue();
-
 d3.select("body")
   .on("keydown", () => {
     let cur_key = key_map[d3.event.key];
@@ -134,22 +76,21 @@ d3.select("body")
       cur_key.down = false;
       cur_key.func_up();
     }
+  })
+  .on("mouseup", () => {
+    if (click_note != null) {
+      keyboard_event_off[click_note]();
+    }
   });
 
 for (let i = 0; i < notemap_white.length; i++) {
   //set (piano) keyboard events
   keyboard_event_on[notemap_white[i]] = function() {
-    key_set.add(notemap_white[i])
     synth.triggerAttack(notemap_white[i]);
     d3.select("#" + notemap_white[i]).attr("class", "white-down white key");
   };
   keyboard_event_off[notemap_white[i]] = function() {
-    let prev = key_set.remove(notemap_white[i]);
-    if (prev) {
-      synth.triggerAttack(prev);
-    } else if (key_set.size == 0) {
-      synth.triggerRelease();
-    }
+    synth.triggerRelease(notemap_white[i]);
     d3.select("#" + notemap_white[i]).attr("class", "white key");
   };
 
@@ -171,7 +112,7 @@ for (let i = 0; i < notemap_black.length; i++) {
     d3.select("#" + notemap_black[i]).attr("class", "black-down black key");
   };
   keyboard_event_off[notemap_black[i]] = function() {
-    synth.triggerRelease();
+    synth.triggerRelease(notemap_black[i]);
     d3.select("#" + notemap_black[i]).attr("class", "black key");
   };
 
@@ -196,11 +137,6 @@ for (let i = 0; i < keys_white; i++) {
     .on("mousedown", () => {
       keyboard_event_on[notemap_white[i]]();
       click_note = notemap_white[i];
-    })
-    .on("mouseup", () => {
-      if (click_note != null) {
-        keyboard_event_off[click_note]();
-      }
     })
     .append("div")
     .attr("class", "label")
