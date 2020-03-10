@@ -6,7 +6,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #f1f1f1;
     transition: 0.5s;
     overflow-x: hidden;
     padding-top: 60px;
@@ -17,13 +17,13 @@
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: #000000;
     display: block;
     cursor: pointer;
 }
 
 .sidebar a:hover {
-    color: #f1f1f1;
+    color: #777;
 }
 
 main .sidebar {
@@ -34,9 +34,9 @@ main .sidebar {
     margin-left: 50px;
 }
 
-.material-icons,
 .icon-text {
     vertical-align: middle;
+    margin-left: 30px;
 }
 
 .material-icons {
@@ -61,7 +61,7 @@ main .sidebar {
 
 .tabcontent {
     display: none;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 /* Horizontal collapsible */
