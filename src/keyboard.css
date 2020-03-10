@@ -1,8 +1,5 @@
-body {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 #keyboard-root {
+    font-family: Arial, Helvetica, sans-serif;
     margin: 0 auto 10px auto;
     display: flex;
     position: relative;
