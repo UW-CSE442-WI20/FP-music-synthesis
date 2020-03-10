@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Sliders
   var attackSlider = sliderHorizontal()
-      .min(0)
+      .min(0.01)
       .max(2)
       .width(sliderWidth)
       .displayValue(true)
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function() {
     .call(attackSlider);
 
   var decaySlider = sliderHorizontal()
-      .min(0)
+      .min(0.01)
       .max(2)
       .width(sliderWidth)
       .displayValue(true)
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function() {
     .call(decaySlider);
 
   var sustainSlider = sliderHorizontal()
-      .min(0)
+      .min(0.01)
       .max(1)
       .width(sliderWidth)
       .displayValue(true)
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function() {
     .call(sustainSlider);
 
   var releaseSlider = sliderHorizontal()
-      .min(0)
+      .min(0.01)
       .max(4)
       .width(sliderWidth)
       .displayValue(true)
