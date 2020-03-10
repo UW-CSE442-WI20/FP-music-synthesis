@@ -31,7 +31,10 @@ document.addEventListener("DOMContentLoaded", function() {
     openPage(this.id);
   });
 
-  openPage("home");
+  // get url and open the relevant page if possible
+  let path = window.location.href;
+  let page = path.substring(path.lastIndexOf("#") + 1);
+  openPage(page);
 
   // Horizontal Collapsible
   d3.selectAll(".accordion")
