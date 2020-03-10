@@ -1,0 +1,25 @@
+/* HIDE RADIO */
+[type=radio] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+  
+/* IMAGE STYLES */
+[type=radio] + img {
+  cursor: pointer;
+  margin: 5px;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+  outline: 2px solid #f00;
+}
+
+#wave-selector {
+  display: flex;
+  flex-direction: row;
+}
+
+/*# sourceMappingURL=/synth.fa1ddf48.css.map */

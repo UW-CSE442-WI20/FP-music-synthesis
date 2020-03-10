@@ -1,6 +1,10 @@
 // Import Tone
-import * as Tone from "tone";
 const d3 = require('d3');
+
+const synthMaster = require('./synth.js');
+const synth = synthMaster.synth;
+const fft = synthMaster.fft;
+const waveform = synthMaster.waveform;
 
 const keyboard = d3.select("#keyboard-root");
 
@@ -8,10 +12,10 @@ const keyboard = d3.select("#keyboard-root");
 
 // width and height of entire keyboard
 const width = 800;
-const height = 300;
+const height = 150;
 
 // 1 Octave: 8 keys (C-C), 2 groups
-const octaves = 2;                  // num of octaves
+const octaves = 3;                  // num of octaves
 const keys_white = 7 * octaves + 1; // num of white keys
 
 const black_ratio_w = .8;       // ratio of width of black keys to width of white keys
@@ -20,8 +24,6 @@ const black_height = black_ratio_h * height;
 
 const white_width = width / keys_white;
 const black_width = white_width * black_ratio_w;
-
-const synth = new Tone.Synth().toMaster();
 
 keyboard
   .style("height", height + "px")
@@ -49,7 +51,7 @@ const notemap_white = [
 const notemap_black = [
   'Db4', 'Eb4', '', 'Gb4', 'Ab4', 'Bb4', '',
   'Db5', 'Eb5', '', 'Gb5', 'Ab5', 'Bb5', '',
-  'Db6', 'Eb6', '', 'Gb6', 'Ab6', 'Bb6', '',
+  'Db6', 'Eb6', '', 'Gb6', 'Ab6', 'Bb6', ''
 ];
 
 // create map to store keyboard events for specific keys
@@ -60,15 +62,11 @@ const keyboard_event_off = {};
 // link keyboard shortcuts
 const key_map = {};
 
-// TODO: create queue system so that we don't sustain and release when we don't want to
-var keys_down = 0;
-
 d3.select("body")
   .on("keydown", () => {
     let cur_key = key_map[d3.event.key];
     if (cur_key && !cur_key.down) {
       cur_key.down = true;
-      keys_down++;
       cur_key.func_down();
     }
   })
@@ -76,20 +74,23 @@ d3.select("body")
     let cur_key = key_map[d3.event.key];
     if (cur_key && cur_key.down) {
       cur_key.down = false;
-      keys_down--;
       cur_key.func_up();
+    }
+  })
+  .on("mouseup", () => {
+    if (click_note != null) {
+      keyboard_event_off[click_note]();
     }
   });
 
 for (let i = 0; i < notemap_white.length; i++) {
   //set (piano) keyboard events
-  keyboard_event_on[notemap_white[i]] = function () {
-    synth.triggerRelease();
+  keyboard_event_on[notemap_white[i]] = function() {
     synth.triggerAttack(notemap_white[i]);
     d3.select("#" + notemap_white[i]).attr("class", "white-down white key");
   };
-  keyboard_event_off[notemap_white[i]] = function () {
-    synth.triggerRelease();
+  keyboard_event_off[notemap_white[i]] = function() {
+    synth.triggerRelease(notemap_white[i]);
     d3.select("#" + notemap_white[i]).attr("class", "white key");
   };
 
@@ -106,12 +107,12 @@ for (let i = 0; i < notemap_black.length; i++) {
     continue;
   }
   //set (piano) keyboard events
-  keyboard_event_on[notemap_black[i]] = function () {
+  keyboard_event_on[notemap_black[i]] = function() {
     synth.triggerAttack(notemap_black[i]);
     d3.select("#" + notemap_black[i]).attr("class", "black-down black key");
   };
-  keyboard_event_off[notemap_black[i]] = function () {
-    synth.triggerRelease();
+  keyboard_event_off[notemap_black[i]] = function() {
+    synth.triggerRelease(notemap_black[i]);
     d3.select("#" + notemap_black[i]).attr("class", "black key");
   };
 
@@ -126,17 +127,20 @@ for (let i = 0; i < notemap_black.length; i++) {
 // ------------------------------------------------
 // ---            DRAW KEYBOARD                 ---
 // ------------------------------------------------
+let click_note = null;
 
 // create white keys
 for (let i = 0; i < keys_white; i++) {
   keyboard.append("div")
     .attr("class", "white key")
     .attr("id", notemap_white[i])
-    .on("mousedown", keyboard_event_on[notemap_white[i]])
-    .on("mouseup", keyboard_event_off[notemap_white[i]])
-      .append("div")
-      .attr("class", "label")
-      .text(keymap_white[i]);
+    .on("mousedown", () => {
+      keyboard_event_on[notemap_white[i]]();
+      click_note = notemap_white[i];
+    })
+    .append("div")
+    .attr("class", "label")
+    .text(keymap_white[i]);
 }
 
 // create black keys
@@ -157,11 +161,87 @@ for (let i = 0; i < keys_white; i++) {
       .style("left", offset + "px")
       .on("mousedown", keyboard_event_on[notemap_black[i]])
       .on("mouseup", keyboard_event_off[notemap_black[i]])
-        .append("div")
-        .attr("class", "label")
-        .text(keymap_black[i]);
+      .append("div")
+      .attr("class", "label")
+      .text(keymap_black[i]);
 
     //update offset
     offset += white_width;
   }
 }
+
+// ---------------------
+// --- DRAW ANALYZER ---
+// ---------------------
+
+//
+// draw chart
+var HEIGHT = 60,
+    WIDTH = 800;
+
+// fft
+//
+var svg_fft = d3.select('#fft-root')
+            .append('svg')
+            .attr('height', HEIGHT)
+            .attr('width', WIDTH);
+
+// create scales
+var x_fft = d3.scaleLinear()
+          .domain([0, fft.size-1])
+          .range([0, WIDTH]);
+
+var y_fft = d3.scaleLinear()
+          .domain([-190, -10])
+          .range([HEIGHT, 0]);
+
+// create line generator 
+var line_fft = d3.line()
+                .x(function(d,i) {return x_fft(i);})
+                .y(function(d) {return y_fft(d);});
+
+// add the path directly to the svg and draw the data directly
+svg_fft.append("path")
+  .attr("d", line_fft(fft.getValue()));
+
+// draw wave stuff
+var svg_wave = d3.select('#waveform-root')
+            .append('svg')
+            .attr('height', HEIGHT)
+            .attr('width', WIDTH);
+
+// create scales
+var x_wave = d3.scaleLinear()
+            .domain([0, waveform.size-1])
+            .range([0, WIDTH]);
+
+var y_wave = d3.scaleLinear()
+            .domain([-1, 1])
+            .range([0, HEIGHT]);
+
+// create line generator 
+var line_wave = d3.line()
+                  .x(function(d,i) {return x_wave(i);})
+                  .y(function(d) {return y_wave(d);});
+                  
+// add path directly to the svg and draw the data directly
+svg_wave.append("path")
+        .attr("d", line_wave(waveform.getValue()));
+
+// update visualizations using requestAnimateFrame
+function renderChart() {
+  requestAnimationFrame(renderChart);
+
+  // get fft data and update plot
+  svg_fft.selectAll("path")
+          .attr("d", line_fft(fft.getValue()));
+
+  // get wave data and update plot
+  svg_wave.selectAll("path")
+          .attr("d", line_wave(waveform.getValue()));
+
+  //console.log(waveform.getValue())
+}
+
+// Begin animation
+renderChart();

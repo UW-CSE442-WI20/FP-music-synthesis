@@ -9,14 +9,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-  <link rel="stylesheet" href="css/collapse.css">
+  <link rel="stylesheet" href="https://uw-cse442-wi20.github.io/FP-music-synthesis/normalize.eebf92c5.css">
+  <link rel="stylesheet" href="https://uw-cse442-wi20.github.io/FP-music-synthesis/skeleton.92f99d6f.css">
+  <link rel="stylesheet" href="https://uw-cse442-wi20.github.io/FP-music-synthesis/collapse.0e6ac9be.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   
-  <link rel="stylesheet" type="text/css" href="envelope.css">
-  <link rel="stylesheet" type="text/css" href="keyboard.css">
-  <link rel="stylesheet" type="text/css" href="synth.css">
+  <link rel="stylesheet" type="text/css" href="https://uw-cse442-wi20.github.io/FP-music-synthesis/keyboard.634b66ca.css">
+  <link rel="stylesheet" type="text/css" href="https://uw-cse442-wi20.github.io/FP-music-synthesis/synth.aafdbe72.css">
 </head>
 
 <body>
@@ -39,12 +38,12 @@
   </div>
 
   <div id="mySidebar" class="sidebar">
-    <a class="tablink" id="home"><span><i class="material-icons">home</i><span class="icon-text">home</span></a><br>
-    <a class="tablink" id="sound-waves"><span><i class="material-icons">waves</i><span class="icon-text">sound waves</span></a><br>
-    <a class="tablink" id="pitch"><span><i class="material-icons">filter_list</i><span class="icon-text">pitch</span></a><br>
-    <a class="tablink" id="oscillators"><i class="material-icons">calendar_view_day</i><span class="icon-text"></span>oscillators</a></span></a><br>
-    <a class="tablink" id="envelopes"><i class="material-icons">graphic_eq</i><span class="icon-text"></span>envelopes</span></a><br>
-    <a class="tablink" id="filters"><i class="material-icons">filter_none</i><span class="icon-text"></span>filters<span></a>
+    <a class="tablink" id="home"><span><i class="material-icons">home</i><span class="icon-text">home</span></span></a><br>
+    <a class="tablink" id="sound-waves"><span><i class="material-icons">waves</i><span class="icon-text">sound waves</span></span></a><br>
+    <a class="tablink" id="pitch"><span><i class="material-icons">filter_list</i><span class="icon-text">pitch</span></span></a><br>
+    <a class="tablink" id="oscillators"><i class="material-icons">calendar_view_day</i><span class="icon-text"></span>oscillators</a><br>
+    <a class="tablink" id="envelopes"><i class="material-icons">graphic_eq</i><span class="icon-text"></span>envelopes</a><br>
+    <a class="tablink" id="filters"><i class="material-icons">filter_none</i><span class="icon-text"></span>filters<span></span></a>
   </div>
 
   <div id="home-tab" class="tabcontent">
@@ -66,7 +65,7 @@
     <h3>Oscillators</h3>
     <div id="wave-selector">
       <label>
-        <input type="radio" name="wave-type" value="sine" checked>
+        <input type="radio" name="wave-type" value="sine" checked="">
         <img src="http://placehold.it/100x60/0bf/fff&text=Sine">
       </label>
       <label>
@@ -89,19 +88,6 @@
     <h3>Envelopes</h3>
     <p>Behaviour</p>
     <div id="envelope-viz"></div>
-    <div id="envelope-sliders">
-      <span class="envelope-slider-title">Attack</span>
-      <select id="envelope-attack-select"></select>
-      <div class="envelope-slider" id="envelope-attack-slider"></div>
-      <span class="envelope-slider-title">Decay</span>
-      <select id="envelope-decay-select"></select>
-      <div class="envelope-slider" id="envelope-decay-slider"></div>
-      <span class="envelope-slider-title">Sustain</span>
-      <div class="envelope-slider" id="envelope-sustain-slider"></div>
-      <span class="envelope-slider-title">Release</span>
-      <select id="envelope-release-select"></select>
-      <div class="envelope-slider" id="envelope-release-slider"></div>
-    </div>
   </div>
 
   <div id="filters-tab" class="tabcontent">
@@ -110,9 +96,8 @@
   </div>
 </div>
 
-<script src="./index.js"></script>
-<script src="./keyboard.js"></script>
-<script src="./envelope.js"></script>
+<script src="https://uw-cse442-wi20.github.io/FP-music-synthesis/src.1984c68c.js"></script>
+<script src="https://uw-cse442-wi20.github.io/FP-music-synthesis/keyboard.03a41ffd.js"></script>
 
 </body>
 
