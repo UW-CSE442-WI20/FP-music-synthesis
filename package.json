@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "d3": "^5.15.0",
+    "d3-simple-slider": "^1.5.4",
     "tone": "^13.8.25"
   }
 }

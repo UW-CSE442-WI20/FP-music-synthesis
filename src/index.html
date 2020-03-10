@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="css/collapse.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   
+  <link rel="stylesheet" type="text/css" href="envelope.css">
   <link rel="stylesheet" type="text/css" href="keyboard.css">
   <link rel="stylesheet" type="text/css" href="synth.css">
 </head>
@@ -88,6 +89,19 @@
     <h3>Envelopes</h3>
     <p>Behaviour</p>
     <div id="envelope-viz"></div>
+    <div id="envelope-sliders">
+      <span class="envelope-slider-title">Attack</span>
+      <select id="envelope-attack-select"></select>
+      <div class="envelope-slider" id="envelope-attack-slider"></div>
+      <span class="envelope-slider-title">Decay</span>
+      <select id="envelope-decay-select"></select>
+      <div class="envelope-slider" id="envelope-decay-slider"></div>
+      <span class="envelope-slider-title">Sustain</span>
+      <div class="envelope-slider" id="envelope-sustain-slider"></div>
+      <span class="envelope-slider-title">Release</span>
+      <select id="envelope-release-select"></select>
+      <div class="envelope-slider" id="envelope-release-slider"></div>
+    </div>
   </div>
 
   <div id="filters-tab" class="tabcontent">
@@ -98,6 +112,7 @@
 
 <script src="./index.js"></script>
 <script src="./keyboard.js"></script>
+<script src="./envelope.js"></script>
 
 </body>
 
