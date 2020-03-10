@@ -1,5 +1,7 @@
-import * as Tone from 'tone';
-import * as d3 from 'd3';
+const d3 = require("d3");
+
+const keyboard = require("./keyboard.js");
+const envelope = require("./envelope.js");
 
 // Sidebar
 var mini = true;
