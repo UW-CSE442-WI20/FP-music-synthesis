@@ -18,9 +18,19 @@ function toggleSidebar() {
 }
 
 // Pages
+var haveKeyboard = [
+  "home",
+  "oscillators",
+  "envelopes",
+  "filters"
+]
 function openPage(pageName) {
   d3.selectAll(".tabcontent").style("display", "none");
   d3.select("#" + pageName + "-tab").style("display", "block");
+  if (haveKeyboard.includes(pageName))
+    d3.select("#keyboard-container").style("display", "block");
+  else
+    d3.select("#keyboard-container").style("display", "none");
 }
 
 document.addEventListener("DOMContentLoaded", function() {

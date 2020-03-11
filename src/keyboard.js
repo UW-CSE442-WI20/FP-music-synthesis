@@ -3,7 +3,6 @@ const d3 = require('d3');
 
 const synthMaster = require('./synth.js');
 const synth = synthMaster.synth;
-const fft = synthMaster.fft;
 const waveform = synthMaster.waveform;
 
 const keyboard = d3.select("#keyboard-root");
@@ -198,32 +197,6 @@ for (let i = 0; i < keys_white; i++) {
 var HEIGHT = 60,
     WIDTH = 800;
 
-// fft
-//
-var svg_fft = d3.select('#fft-root')
-            .append('svg')
-            .attr('height', HEIGHT)
-            .attr('width', WIDTH);
-
-// create scales
-var x_fft = d3.scaleLinear()
-          .domain([0, fft.size-1])
-          .range([0, WIDTH]);
-
-var y_fft = d3.scaleLinear()
-          .domain([-190, -10])
-          .range([HEIGHT, 0]);
-
-// create line generator 
-var line_fft = d3.line()
-                .defined((d) => d != "-Infinity")
-                .x(function(d,i) {return x_fft(i);})
-                .y(function(d) {return y_fft(d);});
-
-// add the path directly to the svg and draw the data directly
-svg_fft.append("path")
-  .attr("d", line_fft(fft.getValue()));
-
 // draw wave stuff
 var svg_wave = d3.select('#waveform-root')
             .append('svg')
@@ -251,10 +224,6 @@ svg_wave.append("path")
 // update visualizations using requestAnimateFrame
 function renderChart() {
   requestAnimationFrame(renderChart);
-
-  // get fft data and update plot
-  svg_fft.selectAll("path")
-          .attr("d", line_fft(fft.getValue()));
 
   // get wave data and update plot
   svg_wave.selectAll("path")
