@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import { sliderHorizontal } from 'd3-simple-slider';
 
 function generateSineData(freq){
-  return d3.range(0, 30000).map(function(i){
+  return d3.range(0, 100, 0.2).map(function(i){
     return Math.sin(i * freq);
   });
 }
@@ -72,7 +72,7 @@ var pitchSlider = sliderHorizontal()
   .max(10)
   .width(300)
   .displayValue(true)
-  .tickFormat(d3.format('0.1'))
+  .tickFormat(d3.format('1'))
   .default(pitch)
   .on('onchange', val => {
     updatePitch(val);
