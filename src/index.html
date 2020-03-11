@@ -49,21 +49,39 @@
 
   <div id="home-tab" class="tabcontent">
     <h3>Home</h3>
-    <p>Home is where the heart is..</p>
+    <p>
+      In this tutorial, you will learn about the basic theory and tools used to synthesize electronic instruments.
+    </p>
   </div>
+
 
   <div id="sound-waves-tab" class="tabcontent">
     <h3>Sound Waves</h3>
-    <p>we love physics</p>
+    <p>
+      In physics, we visualize sound as waves. Mathematically, we represent these waves as an <b>amplitude</b>, or intensity, that changes <b>over time</b>
+    </p>
+    <!-- TODO: add visual -->
   </div>
 
   <div id="pitch-tab" class="tabcontent">
     <h3>Pitch</h3>
-    <p>baseball</p>
+    <p>
+      Pitch determines <b>how high</b> or <b>how low</b> a wave sounds. When a sound wave repeats a pattern, it produces a consistent pitch. When these patterns are shortened, the pitch increases. This is also known as increasing the <b>frequency</b>.
+    </p>
+    <p>
+      Drag the slider to change the frequency. Click the button to hear the tone it produces.
+    </p>
+    <!-- TODO: add visual -->
   </div>
 
   <div id="oscillators-tab" class="tabcontent">
     <h3>Oscillators</h3>
+    <p>
+      We use oscillators to generate different <b>wave shapes</b>. These shapes change the <b>quality of the sound</b>, also known as the <b>timbre</b>
+    </p>
+    <p>
+      Select different oscillators and try them on the keyboard above.
+    </p>
     <div id="wave-selector">
       <label>
         <input type="radio" name="wave-type" value="sine" checked>
@@ -87,19 +105,42 @@
 
   <div id="envelopes-tab" class="tabcontent">
     <h3>Envelopes</h3>
-    <p>Behaviour</p>
+    <p>
+      An envelope describes how <b>volume</b> changes <b>over time</b>.
+    </p>
+    <p>
+      There are a few parameters that define an envelope. Try changing them below and listen to how they change the tones played on the keyboard.
+    </p>
     <div id="envelope-viz"></div>
     <div id="envelope-sliders">
       <span class="envelope-slider-title">Attack</span>
       <select id="envelope-attack-select"></select>
+      <p class="envelope-param-description">
+	This controls how long it takes for a tone to reach full volume.
+      </p>
       <div class="envelope-slider" id="envelope-attack-slider"></div>
+      <hr>
+
       <span class="envelope-slider-title">Decay</span>
       <select id="envelope-decay-select"></select>
+      <p class="envelope-param-description">
+	This controls how long it takes for a tone to decrease to the sustain volume.
+      </p>
       <div class="envelope-slider" id="envelope-decay-slider"></div>
+      <hr>
+
       <span class="envelope-slider-title">Sustain</span>
+      <p class="envelope-param-description">
+	This controls the volume a tone drops to before being released.
+      </p>
       <div class="envelope-slider" id="envelope-sustain-slider"></div>
+      <hr>
+
       <span class="envelope-slider-title">Release</span>
       <select id="envelope-release-select"></select>
+      <p class="envelope-param-description">
+	This controls how long the volume takes to fade out after a tone is released.
+      </p>
       <div class="envelope-slider" id="envelope-release-slider"></div>
     </div>
   </div>
