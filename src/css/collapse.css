@@ -9,7 +9,7 @@
     background-color: #f1f1f1;
     transition: 0.5s;
     overflow-x: hidden;
-    padding-top: 60px;
+    padding-top: 35px;
     white-space: nowrap;
 }
 
@@ -95,3 +95,10 @@ main .sidebar {
 .active:after {
     content: "\2796";
 }
+
+#logo {
+    display: block;
+    margin-left: 110px;
+    margin-bottom: 15px;
+}
+

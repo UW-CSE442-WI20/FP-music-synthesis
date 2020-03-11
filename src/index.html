@@ -10,7 +10,7 @@
 
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 
-  <link rel="stylesheet" href="css/normalize.css">
+<!--  <link rel="stylesheet" href="css/normalize.css">-->
   <link rel="stylesheet" href="css/skeleton.css">
   <link rel="stylesheet" href="css/collapse.css">
   <link rel="stylesheet" type="text/css" href="keyboard.css">
@@ -40,13 +40,14 @@
   </div>
 
   <div id="mySidebar" class="sidebar">
-    <a class="tablink" id="home"><img src="images/home.png" width="30px" height="30px"><span class="icon-text">home</span></a><br>
-    <a class="tablink" id="sound-waves"><img src="images/soundwave.png" width="30px" height="30px"><span class="icon-text">sound waves</span></a><br>
-    <a class="tablink" id="pitch"><img src="images/tuningfork.png" width="30px" height="30px"><span class="icon-text">pitch</span></a><br>
-    <a class="tablink" id="oscillators"><img src="images/squarewave.png" width="30px" height="30px"><span class="icon-text">oscillators</span></a><br>
-    <a class="tablink" id="envelopes"><img src="images/envelope.png" width="30px" height="30px"><span class="icon-text">envelopes</span></a><br>
-    <a class="tablink" id="filters"><img src="images/filter.png" width="30px" height="30px"><span class="icon-text">filters</span></a><br>
-    <a class="tablink" id="final"><img src="images/piano.png" width="30px" height="30px"><span class="icon-text">synth</span></a>
+    <div id="logo"><img src="images/logo.png" width="65px" height="55px"></div>
+    <a class="tablink" id="home"><img src="images/home.png" width="25px" height="25px"><span class="icon-text">home</span></a><br>
+    <a class="tablink" id="sound-waves"><img src="images/soundwave.png" width="25px" height="25px"><span class="icon-text">sound waves</span></a><br>
+    <a class="tablink" id="pitch"><img src="images/tuningfork.png" width="25px" height="25px"><span class="icon-text">pitch</span></a><br>
+    <a class="tablink" id="oscillators"><img src="images/squarewave.png" width="25px" height="25px"><span class="icon-text">oscillators</span></a><br>
+    <a class="tablink" id="envelopes"><img src="images/envelope.png" width="25px" height="25px"><span class="icon-text">envelopes</span></a><br>
+    <a class="tablink" id="filters"><img src="images/filter.png" width="25px" height="25px"><span class="icon-text">filters</span></a><br>
+    <a class="tablink" id="final"><img src="images/piano.png" width="25px" height="25px"><span class="icon-text">synth</span></a>
   </div>
 
   <div id="home-tab" class="tabcontent">
@@ -68,20 +69,24 @@
     <h3>Oscillators</h3>
     <div id="wave-selector">
       <label>
-        <input type="radio" name="wave-type" value="sine" checked>
-        <img src="http://placehold.it/100x60/0bf/fff&text=Sine">
+        <input type="radio" name="wave-type" value="sine">
+        <button id="waveButton"><img src="images/sine.png"></button>
+        <p>sine</p>
       </label>
       <label>
         <input type="radio" name="wave-type" value="square">
-        <img src="http://placehold.it/100x60/0bf/fff&text=Square">
+        <button id="waveButton"><img src="images/square.png"></button>
+        <p>square</p>
       </label>
       <label>
         <input type="radio" name="wave-type" value="sawtooth">
-        <img src="http://placehold.it/100x60/0bf/fff&text=Saw">
+        <button id="waveButton"><img src="images/saw.png"></button>
+        <p>sawtooth</p>
       </label>
       <label>
         <input type="radio" name="wave-type" value="triangle">
-        <img src="http://placehold.it/100x60/0bf/fff&text=Triangle">
+        <button id="waveButton"><img src="images/triangle.png"></button>
+        <p>triangle</p>
       </label>
     </div>
     <p>Sound</p>
