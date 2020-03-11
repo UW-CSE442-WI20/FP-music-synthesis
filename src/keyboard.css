@@ -16,7 +16,8 @@
     color: black;
 }
 .white:hover {
-    background-color: hsl(0, 0%, 95%);
+    /*background-color: hsl(0, 0%, 95%);*/
+    background-color: rgb(151, 0, 203, 0.1);
 }
 .white.white-down {
     background-color: hsl(0, 0%, 90%);
@@ -28,7 +29,8 @@
     color: white;
 }
 .black:hover {
-    background-color: hsl(0, 0%, 15%);
+    /*background-color: hsl(0, 0%, 15%);*/
+    background-color: rgb(173, 4, 206);
 }
 .black.black-down{
     background-color: hsl(0, 0%, 20%);

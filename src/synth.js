@@ -43,20 +43,21 @@ function setEnvelope(envl) {
 // --------------------
 
 var width = 0;
-var height = 300 + 0;
+var height = 155 + 0;
 
 var offsetW = 50;
-var offsetH = 30;
+var offsetH = 15;
 
 var volumeSlider = sliderVertical()
   .min(-32)
   .max(0)
   .width(width)
   .height(height)
-  .tickFormat(d3.format('.2'))
+  // .tickFormat(d3.format('.2'))
+    .displayValue(false)
   .ticks(0)
   .default(DEFAULT_VOLUME)
-  .fill('#2196f3')
+  .fill('#c400dd')
   .handle(d3
     .symbol()
     .type(d3.symbolCircle)

@@ -16,14 +16,14 @@
 .sidebar a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
-    font-size: 23px;
+    font-size: 22px;
     color: #000000;
     display: block;
     cursor: pointer;
 }
 
 .sidebar a:hover {
-    color: #c302da;
+    background-color: rgb(151, 0, 203, 0.1);
 }
 
 main .sidebar {
@@ -39,6 +39,9 @@ main .sidebar {
     margin-left: 30px;
 }
 
+.sidebar img {
+    vertical-align: middle;
+}
 #main {
     padding: 16px;
     margin-left: 85px;
@@ -98,7 +101,7 @@ main .sidebar {
 
 #logo {
     display: block;
-    margin-left: 110px;
+    margin-left: 105px;
     margin-bottom: 15px;
 }
 

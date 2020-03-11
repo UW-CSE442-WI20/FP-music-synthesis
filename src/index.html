@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<div id="volume"></div>
+<div id="volume"><img src="images/volume.png" width="20px" height="20px"></div>
 <div class="container" style="margin-top: 2vh">
   <h2 style="text-align: center">Music Synthesis</h2>
 
@@ -32,15 +32,16 @@
     <div id="keyboard-root"></div>
     <div id="waveform-root" class="analyzer"></div>
   </div>
+
   <div id="mySidebar" class="sidebar">
     <div id="logo"><img src="images/logo.png" width="65px" height="55px"></div>
-    <a class="tablink" id="home"><img src="images/home.png" width="30px" height="30px"><span class="icon-text">home</span></a><br>
-    <a class="tablink" id="sound-waves"><img src="images/soundwave.png" width="30px" height="30px"><span class="icon-text">sound waves</span></a><br>
-    <a class="tablink" id="pitch"><img src="images/tuningfork.png" width="30px" height="30px"><span class="icon-text">pitch</span></a><br>
-    <a class="tablink" id="oscillators"><img src="images/squarewave.png" width="30px" height="30px"><span class="icon-text">oscillators</span></a><br>
-    <a class="tablink" id="envelopes"><img src="images/music.png" width="30px" height="30px"><span class="icon-text">envelopes</span></a><br>
-    <a class="tablink" id="filters"><img src="images/filter.png" width="30px" height="30px"><span class="icon-text">filters</span></a><br>
-    <a class="tablink" id="final"><img src="images/piano.png" width="30px" height="30px"><span class="icon-text">synth</span></a>
+    <a class="tablink" id="home"><img src="images/home.png" width="25px" height="25px"><span class="icon-text">home</span></a><br>
+    <a class="tablink" id="sound-waves"><img src="images/soundwave.png" width="25px" height="25px"><span class="icon-text">sound waves</span></a><br>
+    <a class="tablink" id="pitch"><img src="images/tuningfork.png" width="25px" height="25px"><span class="icon-text">pitch</span></a><br>
+    <a class="tablink" id="oscillators"><img src="images/squarewave.png" width="25px" height="25px"><span class="icon-text">oscillators</span></a><br>
+    <a class="tablink" id="envelopes"><img src="images/envelope.png" width="25px" height="25px"><span class="icon-text">envelopes</span></a><br>
+    <a class="tablink" id="filters"><img src="images/filter.png" width="25px" height="25px"><span class="icon-text">filters</span></a><br>
+    <a class="tablink" id="final"><img src="images/piano.png" width="25px" height="25px"><span class="icon-text">synth</span></a>
   </div>
 
   <div id="home-tab" class="tabcontent">
@@ -79,23 +80,23 @@
     </p>
     <div id="wave-selector">
       <label>
-        <input type="radio" name="wave-type" value="sine">
-        <button id="waveButton"><img src="images/sine.png"></button>
+        <input type="radio" name="wave-type" value="sine" checked>
+        <img src="images/sine.png">
         <p>sine</p>
       </label>
       <label>
         <input type="radio" name="wave-type" value="square">
-        <button id="waveButton"><img src="images/square.png"></button>
+        <img src="images/square.png">
         <p>square</p>
       </label>
       <label>
         <input type="radio" name="wave-type" value="sawtooth">
-        <button id="waveButton"><img src="images/saw.png"></button>
+        <img src="images/saw.png">
         <p>sawtooth</p>
       </label>
       <label>
         <input type="radio" name="wave-type" value="triangle">
-        <button id="waveButton"><img src="images/triangle.png"></button>
+        <img src="images/triangle.png">
         <p>triangle</p>
       </label>
     </div>
