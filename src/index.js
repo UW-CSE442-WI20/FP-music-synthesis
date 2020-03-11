@@ -2,6 +2,7 @@ const d3 = require("d3");
 
 const keyboard = require("./keyboard.js");
 const envelope = require("./envelope.js");
+const midik = require("./midi.js");
 
 // Sidebar
 var mini = true;
@@ -17,9 +18,19 @@ function toggleSidebar() {
 }
 
 // Pages
+var haveKeyboard = [
+  "home",
+  "oscillators",
+  "envelopes",
+  "filters"
+]
 function openPage(pageName) {
   d3.selectAll(".tabcontent").style("display", "none");
   d3.select("#" + pageName + "-tab").style("display", "block");
+  if (haveKeyboard.includes(pageName))
+    d3.select("#keyboard-container").style("display", "block");
+  else
+    d3.select("#keyboard-container").style("display", "none");
 }
 
 document.addEventListener("DOMContentLoaded", function() {

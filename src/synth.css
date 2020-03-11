@@ -21,3 +21,9 @@
   display: flex;
   flex-direction: row;
 }
+
+#volume {
+  position: absolute;
+  top: 10px;
+  right: 0px;
+}

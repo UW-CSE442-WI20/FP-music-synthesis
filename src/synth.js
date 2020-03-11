@@ -1,10 +1,13 @@
 import * as Tone from 'tone';
-
-const d3 = require('d3');
+import * as d3 from 'd3';
+import { sliderVertical } from 'd3-simple-slider';
 
 var fft = new Tone.FFT();
 var waveform = new Tone.Waveform();
-var synth = new Tone.PolySynth().chain(fft, waveform, Tone.Master);
+var synth = new Tone.PolySynth(8, Tone.Synth).chain(fft, waveform, Tone.Master);
+
+const DEFAULT_VOLUME = -8;
+synth.volume.value = DEFAULT_VOLUME;
 
 // -----------------
 // -- OSCILLATORS --
@@ -20,7 +23,6 @@ function setOscillatorType(type) {
     for (const voice in voices) {
         voices[voice].oscillator.type = type;
     }
-    console.log(type);
 }
 
 function setEnvelope(envl) {
@@ -35,6 +37,43 @@ function setEnvelope(envl) {
         voices[voice].envelope.releaseCurve = envl.releaseCurve;
     }
 }
+
+// --------------------
+// --   VOLUME      ---
+// --------------------
+
+var width = 0;
+var height = 300 + 0;
+
+var offsetW = 50;
+var offsetH = 30;
+
+var volumeSlider = sliderVertical()
+  .min(-32)
+  .max(0)
+  .width(width)
+  .height(height)
+  .tickFormat(d3.format('.2'))
+  .ticks(0)
+  .default(DEFAULT_VOLUME)
+  .fill('#2196f3')
+  .handle(d3
+    .symbol()
+    .type(d3.symbolCircle)
+    .size(200)())
+  .on('onchange', val => {
+    synth.volume.value = val;
+  });
+
+var svg = d3
+  .select('#volume')
+  .append('svg')
+  .attr('width', width + 2*offsetW)
+  .attr('height', height + 2*offsetH)
+  .append('g')
+  .attr('transform', 'translate(' + offsetW + ',' + offsetH + ')');
+
+svg.call(volumeSlider);
 
 module.exports = {
     synth: synth,

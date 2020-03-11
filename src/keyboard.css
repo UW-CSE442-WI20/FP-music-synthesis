@@ -49,7 +49,7 @@
     user-select: none;
 }
 
-#fft-root, #waveform-root {
+#waveform-root {
     fill: none;
     stroke: black;
     stroke-width: 1.5;
