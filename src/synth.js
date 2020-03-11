@@ -4,7 +4,7 @@ const d3 = require('d3');
 
 var fft = new Tone.FFT();
 var waveform = new Tone.Waveform();
-var synth = new Tone.PolySynth().chain(fft, waveform, Tone.Master);
+var synth = new Tone.PolySynth(8, Tone.Synth).chain(fft, waveform, Tone.Master);
 
 // -----------------
 // -- OSCILLATORS --
@@ -20,7 +20,6 @@ function setOscillatorType(type) {
     for (const voice in voices) {
         voices[voice].oscillator.type = type;
     }
-    console.log(type);
 }
 
 function setEnvelope(envl) {

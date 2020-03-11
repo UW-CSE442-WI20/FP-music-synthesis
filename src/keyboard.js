@@ -1,4 +1,4 @@
-// Import Tone
+import * as Tone from "tone";
 const d3 = require('d3');
 
 const synthMaster = require('./synth.js');
@@ -107,8 +107,8 @@ for (let i = 0; i < notemap_black.length; i++) {
     continue;
   }
   //set (piano) keyboard events
-  keyboard_event_on[notemap_black[i]] = function() {
-    synth.triggerAttack(notemap_black[i]);
+  keyboard_event_on[notemap_black[i]] = function(vel) {
+    synth.triggerAttack(notemap_black[i], "+0", vel || 1);
     d3.select("#" + notemap_black[i]).attr("class", "black-down black key");
   };
   keyboard_event_off[notemap_black[i]] = function() {
@@ -122,6 +122,25 @@ for (let i = 0; i < notemap_black.length; i++) {
     func_down: keyboard_event_on[notemap_black[i]],
     func_up: keyboard_event_off[notemap_black[i]]
   };
+}
+
+// create midi note functions
+function note_down(note, vel) {
+  let name = Tone.Midi(note).toNote();
+  if (name in keyboard_event_on) {
+    keyboard_event_on[name](vel);
+  } else {
+    synth.triggerAttack(name, "+0", vel/127);
+  }
+}
+
+function note_up(note) {
+  let name = Tone.Midi(note).toNote();
+  if (name in keyboard_event_off) {
+    keyboard_event_off[name]();
+  } else {
+    synth.triggerRelease(name);
+  }
 }
 
 // ------------------------------------------------
@@ -197,6 +216,7 @@ var y_fft = d3.scaleLinear()
 
 // create line generator 
 var line_fft = d3.line()
+                .defined((d) => d != "-Infinity")
                 .x(function(d,i) {return x_fft(i);})
                 .y(function(d) {return y_fft(d);});
 
@@ -245,3 +265,8 @@ function renderChart() {
 
 // Begin animation
 renderChart();
+
+module.exports = {
+  note_down: note_down,
+  note_up: note_up
+};

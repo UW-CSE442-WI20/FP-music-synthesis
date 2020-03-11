@@ -2,6 +2,7 @@ const d3 = require("d3");
 
 const keyboard = require("./keyboard.js");
 const envelope = require("./envelope.js");
+const midik = require("./midi.js");
 
 // Sidebar
 var mini = true;
