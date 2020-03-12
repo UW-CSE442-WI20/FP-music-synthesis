@@ -24,11 +24,19 @@ document.addEventListener("DOMContentLoaded", function() {
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform",
-	    "translate(" + margin.left + "," + margin.top + ")")
+      	    "translate(" + margin.left + "," + margin.top + ")");
 
   var dataLength = (xBound[1] - xBound[0]) / step;
   var x = d3.scaleLinear().domain([0, dataLength]).range([0, width]);
   var y = d3.scaleLinear().domain(yBound).range([0, height]);
+  var xAxis = d3.axisBottom()
+      .scale(x)
+      .tickValues([])
+      .tickSize(0, 0);
+  var yAxis = d3.axisLeft()
+      .scale(y)
+      .tickValues([])
+      .tickSize(0, 0);
   var line = d3.line()
       .x((d, i) => x(i))
       .y(d => y(d))
@@ -47,12 +55,39 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function initWavePlot() {
+    // Curve
     var data = getWaveCurveData(0);
     svg.append("path")
       .attr("fill", "none")
       .attr("stroke", "black")
       .attr("stroke-width", 1.5)
       .attr("d", line(data));
+
+    // Axis labels
+    svg.append("text")
+      .attr("class", "x label")
+      .attr("text-anchor", "center")
+      .attr("x", width / 2)
+      .attr("y", height + 20)
+      .text("time");
+    svg.append("text")
+      .attr("class", "y label")
+      .attr("text-anchor", "center")
+      .attr("x", -height * 3/4)
+      .attr("y", -20)
+      .attr("dy", ".75em")
+      .attr("transform", "rotate(-90)")
+      .text("pressure");
+
+    // TODO: Display axes
+    // // Axes
+    // svg.append("g")
+    //   .attr("class", "x axis")
+    //   .attr("transform", "translate(0, " + height + ")")
+    //   .call(xAxis);
+    // svg.append("g")
+    //   .attr("class", "y axis")
+    //   .call(yAxis);
   }
 
   function updateWavePlot(t, opacity) {
