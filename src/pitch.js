@@ -1,29 +1,29 @@
 import * as d3 from 'd3';
 import { sliderHorizontal } from 'd3-simple-slider';
 
-function generateSineData(freq){
-  return d3.range(0, 100, 0.2).map(function(i){
-    return Math.sin(i * freq);
-  });
-}
-
-var samples, data, width, height, margin, w, h, xScale, yScale, svg, line, g, pitch, xAxis, yAxis, path;
-samples = Math.PI * 3;
-data = generateSineData(1.0);
-width = 800;
-height = 500;
-pitch = 1;
-margin = {
+const sample_window = 100;
+const DEFAULT = 440;
+const width = 800;
+const height = 500;
+const margin = {
   top: 10,
   right: 10,
   bottom: 40,
   left: 40
 };
-w = width - margin.right;
-h = height - margin.top - margin.bottom;
-xScale = d3.scaleLinear().domain([0, samples - 1]).range([0, w]);
-yScale = d3.scaleLinear().domain([-1, 1]).range([h, 0]);
-svg = d3.select('#vis')
+const w = width - margin.right;
+const h = height - margin.top - margin.bottom;
+
+function generateSineData(freq) {
+  freq = freq / 100;
+  return d3.range(0, sample_window, 0.2).map(function(i) {
+    return Math.sin(i * freq);
+  });
+}
+
+const xScale = d3.scaleLinear().domain([0, sample_window - 1]).range([0, w]);
+const yScale = d3.scaleLinear().domain([-1, 1]).range([h, 0]);
+const svg = d3.select('#pitch-waveform')
   .append('svg')
   .attr('width', w + margin.left + margin.right)
   .attr('height', h + margin.top + margin.bottom)
@@ -35,20 +35,17 @@ svg.append("defs")
   .append("rect")
   .attr("width", w)
   .attr("height", h);
-// xAxis = d3.svg.axis().scale(xScale).ticks(10).orient('bottom');
-// svg.append('g').attr('class', 'x axis').attr("transform", "translate(0," + h + ")").call(xAxis);
-// yAxis = d3.svg.axis().scale(yScale).ticks(5).orient('left');
-// svg.append('g').attr('class', 'y axis').call(yAxis);
-line = d3.line().x(function(d, i){
+
+const line = d3.line().x(function(d, i) {
   return xScale(i);
-}).y(function(d){
+}).y(function(d) {
   return yScale(d);
 }).curve(d3.curveBasis);
 
-g = svg.append('g').attr('clip-path', 'url(#clip)');
-path = g.append('path')
+const g = svg.append('g').attr('clip-path', 'url(#clip)');
+g.append('path')
   .attr('class', 'line')
-  .data([data])
+  .data([generateSineData(DEFAULT)])
   .attr('d', line)
   .style('fill', 'none')
   .style('stroke', 'black')
@@ -68,12 +65,12 @@ function updatePitch(pitch) {
 /*      Slider       */
 /*********************/
 var pitchSlider = sliderHorizontal()
-  .min(0.01)
-  .max(10)
+  .min(1)
+  .max(880)
   .width(300)
   .displayValue(true)
-  .tickFormat(d3.format('1'))
-  .default(pitch)
+  .tickFormat(d3.format('.1f'))
+  .default(DEFAULT)
   .on('onchange', val => {
     updatePitch(val);
 });
