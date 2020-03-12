@@ -44,9 +44,11 @@ document.addEventListener("DOMContentLoaded", function() {
     openPage(this.id);
   });
 
-  // get url and open the relevant page if possible
-  let path = window.location.href;
-  let page = path.substring(path.lastIndexOf("#") + 1);
+  // Open page reference by URL hash.
+  // If there is no hash, load "home" by default.
+  let page = window.location.hash.substr(1);
+  if (page === "")
+    page = "home";
   openPage(page);
 
   // Horizontal Collapsible
