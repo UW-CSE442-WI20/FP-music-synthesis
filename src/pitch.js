@@ -78,9 +78,9 @@ var pitchSlider = sliderHorizontal()
     updatePitch(val);
 });
 d3.select('#pitch-slider')
- .append('svg')
- .attr('width', 300 + 50)
- .attr('height', 100)
- .append('g')
- .attr('transform', 'translate(30,30)')
- .call(pitchSlider);
+  .append('svg')
+  .attr('width', 300 + 50)
+  .attr('height', 100)
+  .append('g')
+  .attr('transform', 'translate(30,30)')
+  .call(pitchSlider);
