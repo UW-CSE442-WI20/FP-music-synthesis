@@ -22,13 +22,16 @@
 </head>
 
 <body>
-<div id="volume"><img src="images/volume.png" width="20px" height="20px"></div>
+<div id="volume">
+  <img id="vol-icon" src="images/volume.png" width="20px" height="20px" \>
+  <img id="vol-mute-icon" src="images/volume-mute.png" width="20px" height="20px" \>
+</div>
 <div class="container" style="margin-top: 2vh">
   <h2 class="center">Music Synthesis</h2>
 
   <div id="keyboard-container">
-    <div id="keyboard-root"></div>
     <div id="waveform-root" class="analyzer"></div>
+    <div id="keyboard-root"></div>
   </div>
 
   <div id="mySidebar" class="sidebar">

@@ -177,8 +177,10 @@ for (let i = 0; i < keys_white; i++) {
       .style("height", black_height + "px")
       .style("width", black_width + "px")
       .style("left", offset + "px")
-      .on("mousedown", keyboard_event_on[notemap_black[i]])
-      .on("mouseup", keyboard_event_off[notemap_black[i]])
+      .on("mousedown", () => {
+        keyboard_event_on[notemap_black[i]]();
+        click_note = notemap_black[i];
+      })
       .append("div")
       .attr("class", "label")
       .text(keymap_black[i]);
