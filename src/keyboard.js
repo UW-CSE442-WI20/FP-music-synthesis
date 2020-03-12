@@ -1,9 +1,8 @@
-// Import Tone
+import * as Tone from "tone";
 const d3 = require('d3');
 
 const synthMaster = require('./synth.js');
 const synth = synthMaster.synth;
-const fft = synthMaster.fft;
 const waveform = synthMaster.waveform;
 
 const keyboard = d3.select("#keyboard-root");
@@ -107,8 +106,8 @@ for (let i = 0; i < notemap_black.length; i++) {
     continue;
   }
   //set (piano) keyboard events
-  keyboard_event_on[notemap_black[i]] = function() {
-    synth.triggerAttack(notemap_black[i]);
+  keyboard_event_on[notemap_black[i]] = function(vel) {
+    synth.triggerAttack(notemap_black[i], "+0", vel || 1);
     d3.select("#" + notemap_black[i]).attr("class", "black-down black key");
   };
   keyboard_event_off[notemap_black[i]] = function() {
@@ -122,6 +121,25 @@ for (let i = 0; i < notemap_black.length; i++) {
     func_down: keyboard_event_on[notemap_black[i]],
     func_up: keyboard_event_off[notemap_black[i]]
   };
+}
+
+// create midi note functions
+function note_down(note, vel) {
+  let name = Tone.Midi(note).toNote();
+  if (name in keyboard_event_on) {
+    keyboard_event_on[name](vel);
+  } else {
+    synth.triggerAttack(name, "+0", vel/127);
+  }
+}
+
+function note_up(note) {
+  let name = Tone.Midi(note).toNote();
+  if (name in keyboard_event_off) {
+    keyboard_event_off[name]();
+  } else {
+    synth.triggerRelease(name);
+  }
 }
 
 // ------------------------------------------------
@@ -159,8 +177,10 @@ for (let i = 0; i < keys_white; i++) {
       .style("height", black_height + "px")
       .style("width", black_width + "px")
       .style("left", offset + "px")
-      .on("mousedown", keyboard_event_on[notemap_black[i]])
-      .on("mouseup", keyboard_event_off[notemap_black[i]])
+      .on("mousedown", () => {
+        keyboard_event_on[notemap_black[i]]();
+        click_note = notemap_black[i];
+      })
       .append("div")
       .attr("class", "label")
       .text(keymap_black[i]);
@@ -178,31 +198,6 @@ for (let i = 0; i < keys_white; i++) {
 // draw chart
 var HEIGHT = 60,
     WIDTH = 800;
-
-// fft
-//
-var svg_fft = d3.select('#fft-root')
-            .append('svg')
-            .attr('height', HEIGHT)
-            .attr('width', WIDTH);
-
-// create scales
-var x_fft = d3.scaleLinear()
-          .domain([0, fft.size-1])
-          .range([0, WIDTH]);
-
-var y_fft = d3.scaleLinear()
-          .domain([-190, -10])
-          .range([HEIGHT, 0]);
-
-// create line generator 
-var line_fft = d3.line()
-                .x(function(d,i) {return x_fft(i);})
-                .y(function(d) {return y_fft(d);});
-
-// add the path directly to the svg and draw the data directly
-svg_fft.append("path")
-  .attr("d", line_fft(fft.getValue()));
 
 // draw wave stuff
 var svg_wave = d3.select('#waveform-root')
@@ -232,10 +227,6 @@ svg_wave.append("path")
 function renderChart() {
   requestAnimationFrame(renderChart);
 
-  // get fft data and update plot
-  svg_fft.selectAll("path")
-          .attr("d", line_fft(fft.getValue()));
-
   // get wave data and update plot
   svg_wave.selectAll("path")
           .attr("d", line_wave(waveform.getValue()));
@@ -245,3 +236,8 @@ function renderChart() {
 
 // Begin animation
 renderChart();
+
+module.exports = {
+  note_down: note_down,
+  note_up: note_up
+};

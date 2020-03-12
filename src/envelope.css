@@ -1,8 +1,13 @@
 .envelope-slider-title {
   margin-right: 20px;
   font-weight: bold;
+  font-size: 1.2em;
 }
 
 .envelope-slider svg {
   margin-left: 0px;
+}
+
+.envelope-param-description {
+  font-style: italic;
 }

@@ -1,5 +1,9 @@
-import * as Tone from 'tone';
-import * as d3 from 'd3';
+const d3 = require("d3");
+
+const keyboard = require("./keyboard.js");
+const envelope = require("./envelope.js");
+const midik = require("./midi.js");
+const pitch = require("./pitch.js");
 
 // Sidebar
 var mini = true;
@@ -15,9 +19,19 @@ function toggleSidebar() {
 }
 
 // Pages
+var haveKeyboard = [
+  "home",
+  "oscillators",
+  "envelopes",
+  "filters"
+]
 function openPage(pageName) {
   d3.selectAll(".tabcontent").style("display", "none");
   d3.select("#" + pageName + "-tab").style("display", "block");
+  if (haveKeyboard.includes(pageName))
+    d3.select("#keyboard-container").style("display", "block");
+  else
+    d3.select("#keyboard-container").style("display", "none");
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -31,7 +45,10 @@ document.addEventListener("DOMContentLoaded", function() {
     openPage(this.id);
   });
 
-  openPage("home");
+  // get url and open the relevant page if possible
+  let path = window.location.href;
+  let page = path.substring(path.lastIndexOf("#") + 1);
+  openPage(page);
 
   // Horizontal Collapsible
   d3.selectAll(".accordion")

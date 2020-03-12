@@ -6,24 +6,24 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #f1f1f1;
     transition: 0.5s;
     overflow-x: hidden;
-    padding-top: 60px;
+    padding-top: 35px;
     white-space: nowrap;
 }
 
 .sidebar a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
-    font-size: 25px;
-    color: #818181;
+    font-size: 22px;
+    color: #000000;
     display: block;
     cursor: pointer;
 }
 
 .sidebar a:hover {
-    color: #f1f1f1;
+    background-color: rgb(151, 0, 203, 0.1);
 }
 
 main .sidebar {
@@ -34,16 +34,14 @@ main .sidebar {
     margin-left: 50px;
 }
 
-.material-icons,
 .icon-text {
     vertical-align: middle;
+    margin-left: 30px;
 }
 
-.material-icons {
-    padding-bottom: 3px;
-    margin-right: 30px;
+.sidebar img {
+    vertical-align: middle;
 }
-
 #main {
     padding: 16px;
     margin-left: 85px;
@@ -61,7 +59,7 @@ main .sidebar {
 
 .tabcontent {
     display: none;
-    margin-top: 40px;
+    margin-top: 15px;
 }
 
 /* Horizontal collapsible */
@@ -99,4 +97,26 @@ main .sidebar {
 
 .active:after {
     content: "\2796";
+}
+
+#logo {
+    display: block;
+    margin-left: 105px;
+    margin-bottom: 15px;
+}
+
+h2 {
+    position: relative;
+    color: rgb(79, 0, 176, 0.5);
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    margin-bottom: 15px;
+}
+
+h2:after {
+    content: "Music Synthesis";
+    position: absolute;
+    left: 2px; top: 1px;
+    color: rgb(216, 4, 222, 0.5);
 }

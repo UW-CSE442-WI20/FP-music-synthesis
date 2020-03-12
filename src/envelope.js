@@ -2,6 +2,8 @@ import * as Tone from 'tone';
 import * as d3 from 'd3';
 import { sliderHorizontal } from 'd3-simple-slider';
 
+const synth = require("./synth.js");
+
 document.addEventListener("DOMContentLoaded", function() {
   var sliderWidth = 300;
   var sliderHeight = 75;
@@ -41,18 +43,19 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function updateEnvelopeCurve(envl) {
+    synth.setEnvelope(envl);
     getEnvelopeCurve(envl, function(points) {
       var x = d3.scaleLinear().domain([0, points.length]).range([0, width]);
       var y = d3.scaleLinear().domain([1, 0]).range([0, height]);
       var line = d3.line()
-	  .x((d, i) => x(i))
-	  .y(d => y(d))
+        .x((d, i) => x(i))
+        .y(d => y(d))
       svg.selectAll("path")
-	.attr("d", line(points));
+	      .attr("d", line(points));
     });
   }
 
-  var envl = new Tone.Envelope().toMaster();
+  var envl = new Tone.Envelope();
 
   var margin = {top: 10, right: 30, bottom: 30, left: 60};
   var width = 460 - margin.left - margin.right;
@@ -75,8 +78,8 @@ document.addEventListener("DOMContentLoaded", function() {
       .tickFormat(d3.format('.2'))
       .default(envl.attack)
       .on('onchange', val => {
-	envl.attack = val;
-	updateEnvelopeCurve(envl);
+        envl.attack = val;
+        updateEnvelopeCurve(envl);
       });
   d3.select('#envelope-attack-slider')
     .append('svg')
@@ -94,8 +97,8 @@ document.addEventListener("DOMContentLoaded", function() {
       .tickFormat(d3.format('.2'))
       .default(envl.decay)
       .on('onchange', val => {
-	envl.decay = val;
-	updateEnvelopeCurve(envl);
+        envl.decay = val;
+        updateEnvelopeCurve(envl);
       });
   d3.select('#envelope-decay-slider')
     .append('svg')
@@ -113,8 +116,8 @@ document.addEventListener("DOMContentLoaded", function() {
       .tickFormat(d3.format('.2'))
       .default(envl.sustain)
       .on('onchange', val => {
-	envl.sustain = val;
-	updateEnvelopeCurve(envl);
+        envl.sustain = val;
+        updateEnvelopeCurve(envl);
       });
   d3.select('#envelope-sustain-slider')
     .append('svg')
@@ -132,8 +135,8 @@ document.addEventListener("DOMContentLoaded", function() {
       .tickFormat(d3.format('.2'))
       .default(envl.release)
       .on('onchange', val => {
-	envl.release = val;
-	updateEnvelopeCurve(envl);
+        envl.release = val;
+        updateEnvelopeCurve(envl);
       });
   d3.select('#envelope-release-slider')
     .append('svg')

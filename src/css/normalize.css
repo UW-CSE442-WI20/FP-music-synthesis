@@ -263,9 +263,9 @@ textarea {
  * Address `overflow` set to `hidden` in IE 8/9/10/11.
  */
 
-button {
-  overflow: visible;
-}
+/*button {*/
+/*  overflow: visible;*/
+/*}*/
 
 /**
  * Address inconsistent `text-transform` inheritance for `button` and `select`.
