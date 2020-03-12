@@ -106,27 +106,16 @@ main .sidebar {
 }
 
 h2 {
-    /*display: inline-block;*/
     position: relative;
-    /*font: 50px Helvetica, Sans-Serif;*/
-    /*letter-spacing: -1px;*/
-    /*text-align: center;*/
-    /*width: 300px;*/
-    color: rgb(109, 0, 188, 0.5);
-    /*margin-left: 350px;*/
+    color: rgb(79, 0, 176, 0.5);
     margin-left: auto;
     margin-right: auto;
     width: 300px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 h2:after {
-    /*text-align: center;*/
-    /*display: inline-block;*/
-    /*width: 300px;*/
-    /*margin-left: px;*/
     content: "Music Synthesis";
-    /*text-align: center;*/
     position: absolute;
     left: 2px; top: 1px;
     color: rgb(216, 4, 222, 0.5);
