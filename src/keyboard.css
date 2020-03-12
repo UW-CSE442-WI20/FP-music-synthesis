@@ -20,7 +20,7 @@
     background-color: rgb(151, 0, 203, 0.1);
 }
 .white.white-down {
-    background-color: hsl(0, 0%, 90%);
+    background-color: rgb(151, 0, 203, 0.2);
 }
 
 .black {
@@ -30,10 +30,10 @@
 }
 .black:hover {
     /*background-color: hsl(0, 0%, 15%);*/
-    background-color: rgb(173, 4, 206);
+    background-color: rgb(111, 3, 133);
 }
 .black.black-down{
-    background-color: hsl(0, 0%, 20%);
+    background-color: rgb(173, 4, 206);
 }
 
 .key {

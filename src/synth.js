@@ -4,7 +4,8 @@ import { sliderVertical } from 'd3-simple-slider';
 
 var fft = new Tone.FFT();
 var waveform = new Tone.Waveform();
-var synth = new Tone.PolySynth(8, Tone.Synth).chain(fft, waveform, Tone.Master);
+var volume = new Tone.Volume();
+var synth = new Tone.PolySynth(8, Tone.Synth).chain(volume, fft, waveform, Tone.Master);
 
 const DEFAULT_VOLUME = -8;
 synth.volume.value = DEFAULT_VOLUME;
@@ -63,7 +64,7 @@ var volumeSlider = sliderVertical()
     .type(d3.symbolCircle)
     .size(200)())
   .on('onchange', val => {
-    synth.volume.value = val;
+    volume.volume.value = val;
   });
 
 var svg = d3
@@ -75,6 +76,22 @@ var svg = d3
   .attr('transform', 'translate(' + offsetW + ',' + offsetH + ')');
 
 svg.call(volumeSlider);
+
+const volOn = d3.select("#vol-icon");
+const volMute = d3.select("#vol-mute-icon");
+
+volOn.on("click", function() {
+    volOn.style("display", "none");
+    volMute.style("display", "block");
+    console.log(volume);
+    volume.mute = true;
+  })
+
+volMute.on("click", function() {
+    volMute.style("display", "none");
+    volOn.style("display", "block");
+    volume.mute = false;
+  })
 
 module.exports = {
     synth: synth,
