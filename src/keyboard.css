@@ -21,6 +21,8 @@
 }
 .white.white-down {
     background-color: rgb(151, 0, 203, 0.2);
+    box-shadow: 0 0 0 0 #CCC8;
+    top: 5px;
 }
 
 .black {
@@ -34,12 +36,16 @@
 }
 .black.black-down{
     background-color: rgb(173, 4, 206);
+    box-shadow: 0 0 0 0 #CCC8;
+    top: 5px;
 }
 
 .key {
     border: 1px solid #AAA8;
     border-radius: 0 0 6px 6px;
     box-shadow: 0 5px 0 0 #CCC8;
+    top: 0;
+    transition: top .1s, box-shadow .1s;
 }
 
 .label {
@@ -57,7 +63,6 @@
     stroke-width: 1.5;
     
     margin: 0 auto 0 auto;
-    border: 1px solid black;
 }
 
 svg {
