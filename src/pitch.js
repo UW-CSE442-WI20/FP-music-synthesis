@@ -28,12 +28,16 @@ document.addEventListener("DOMContentLoaded", function() {
   const buttonWidth = sliderWidth;
   const buttonHeight = 50;
 
-  var frequency = DEFAULT_FREQ;
+  const delay = 16;
+  const timeStep = 10;
 
-  function generateSineData(freq) {
+  var frequency = DEFAULT_FREQ;
+  var t = 0;
+
+  function generateSineData(freq, t=0) {
     freq = freq / 1000;
     return d3.range(0, sampleWindow, sampleStep).map(function(i) {
-      return Math.sin(i * freq);
+      return Math.sin(i * freq + t);
     });
   }
 
@@ -67,12 +71,33 @@ document.addEventListener("DOMContentLoaded", function() {
     .style('stroke', 'black')
     .style('stroke-width', '1px');
 
-  function updateFrequency(freq) {
-    frequency = freq
-    var data = generateSineData(freq);
+  function updateWavePlot() {
+    var data = generateSineData(frequency, t);
     svg.selectAll("path")
       .data([data])
       .attr('d', line);
+  }
+
+  function updateFrequency(freq) {
+    frequency = freq;
+    updateWavePlot(freq);
+  }
+
+  var doAnimation = false;
+  function startWaveAnimation() {
+    function updateLoop() {
+      t += timeStep;
+      updateWavePlot();
+      if (doAnimation) {
+	setTimeout(updateLoop, delay);
+      }
+    }
+    doAnimation = true;
+    updateLoop();
+  }
+
+  function stopWaveAnimation() {
+    doAnimation = false;
   }
 
   /*********************/
@@ -104,11 +129,13 @@ document.addEventListener("DOMContentLoaded", function() {
   toneButton.addEventListener("mousedown", function() {
     toneButtonDown = true;
     synth.triggerAttack(frequency);
+    startWaveAnimation();
   });
   window.addEventListener("mouseup", function() {
     if (toneButtonDown) {
       synth.triggerRelease();
       toneButtonDown = false;
+      stopWaveAnimation();
     }
   });
 });
