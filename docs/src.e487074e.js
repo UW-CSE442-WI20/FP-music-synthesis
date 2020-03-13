@@ -29415,21 +29415,39 @@ for (var _i = 0; _i < notemap_black.length; _i++) {
   var _ret = _loop2(_i);
 
   if (_ret === "continue") continue;
+}
+
+var enharmonic_map = {
+  'A#': 'Bb',
+  'C#': 'Db',
+  'D#': 'Eb',
+  'F#': 'Gb',
+  'G#': 'Ab'
+}; //convert midi to note using pitch scheme with flats to allow for easier css matching
+
+function midi2Note(note) {
+  var name = Tone.Midi(note).toNote();
+
+  if (name.includes("#")) {
+    return enharmonic_map[name.substring(0, 2)] + name.substring(2);
+  } else {
+    return name;
+  }
 } // create midi note functions
 
 
 function note_down(note, vel) {
-  var name = Tone.Midi(note).toNote();
+  var name = midi2Note(note);
 
   if (name in keyboard_event_on) {
-    keyboard_event_on[name](vel);
+    keyboard_event_on[name](vel / 127);
   } else {
     synth.triggerAttack(name, "+0", vel / 127);
   }
 }
 
 function note_up(note) {
-  var name = Tone.Midi(note).toNote();
+  var name = midi2Note(note);
 
   if (name in keyboard_event_off) {
     keyboard_event_off[name]();
@@ -29994,4 +30012,4 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 },{"d3":"UzF0","./keyboard.js":"VgNd","./envelope.js":"AP8s","./midi.js":"ojOq","./soundwave.js":"ZngV","./pitch.js":"sGps"}]},{},["Focm"], null)
-//# sourceMappingURL=https://uw-cse442-wi20.github.io/FP-music-synthesis/src.4b4dc70c.js.map
+//# sourceMappingURL=https://uw-cse442-wi20.github.io/FP-music-synthesis/src.e487074e.js.map
