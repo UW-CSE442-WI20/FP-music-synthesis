@@ -10,7 +10,7 @@
 
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://uw-cse442-wi20.github.io/FP-music-synthesis/skeleton.4fb07215.css">
-  <link rel="stylesheet" href="https://uw-cse442-wi20.github.io/FP-music-synthesis/collapse.aac2e96b.css">
+  <link rel="stylesheet" href="https://uw-cse442-wi20.github.io/FP-music-synthesis/collapse.101d52ec.css">
   <link rel="stylesheet" type="text/css" href="https://uw-cse442-wi20.github.io/FP-music-synthesis/envelope.cc6c9b2d.css">
   <link rel="stylesheet" type="text/css" href="https://uw-cse442-wi20.github.io/FP-music-synthesis/keyboard.2a54b1d4.css">
   <link rel="stylesheet" type="text/css" href="https://uw-cse442-wi20.github.io/FP-music-synthesis/synth.305538da.css">
@@ -26,7 +26,8 @@
   <img id="vol-mute-icon" src="https://uw-cse442-wi20.github.io/FP-music-synthesis/volume-mute.f9174a23.png" width="20px" height="20px" \="">
 </div>
 <div class="container" style="margin-top: 2vh">
-  <h2 class="center">Music Synthesis</h2>
+  <h2 class="title">Music Synthesis</h2>
+  <p class="names">By Zaynah Arif, Jaclyn Brockschmidt, Lynda Pham, and Peter Vu</p>
 
   <div id="keyboard-container">
     <div id="waveform-root" class="analyzer"></div>
@@ -49,7 +50,7 @@
   <div id="home-tab" class="tabcontent">
     <h3>Home</h3>
     <p>
-      In this tutorial, you will learn about the basic theory and tools used to synthesize electronic instruments.
+      In this tutorial, you will learn about the basic theory and tools used to synthesize electronic sounds.
     </p>
     <p>
       Use the panel on the left to navigate to the first tutorial on <b>sound waves</b>.
@@ -59,15 +60,15 @@
   <div id="sound-waves-tab" class="tabcontent">
     <h3>Sound Waves</h3>
     <p>
-      In physics, we visualize sound as waves. When an object moves, the air particles around it vibrate by bouncing off of
-      each other and cause sound waves that move back and forth, which we interpret as sound once the vibrations reach our ears. 
-      We represent these waves as <b>pressure</b> that changes <b>over time</b>.
+      In physics, we visualize sound as waves. When an object moves in a certain way, the air particles around it vibrate and bounce off of
+      each other creating regions of higher and lower pressure. We interpret these changes as sound once the vibrations reach our ears. 
+      These waves are represented as <b>pressure</b> that changes <b>over time</b>.
     </p>
     <div id="soundwave-viz"></div>
     <p>
       A wave can be broken into four parts:
       <ul>
-	<li>The <b>amplititude</b>, or the height of the wave.</li>
+	<li>The <b>amplitude</b>, or the height of the wave. The greater the amplitude, the louder the sound.</li>
 	<li>The <b>wavelength</b>, or the horizontal distance of one complete cycle of the wave.</li>
 	<li>The <b>period</b>, or how long it takes for a single cycle to completed.
 	</li><li>The <b>frequency</b>, or how many cycles pass a specific point in one second.</li>
@@ -80,7 +81,7 @@
   <div id="pitch-tab" class="tabcontent">
     <h3>Pitch</h3>
     <p>
-      Pitch determines <b>how high</b> or <b>how low</b> a wave sounds. When a sound wave repeats a pattern, it produces a consistent pitch. When the <b>frequency</b> is increased (i.e. when wavelengths get closer), the pitch increases.
+      Pitch determines <b>how high</b> or <b>how low</b> a wave sounds. When a sound wave repeats a pattern, it produces a consistent pitch. When the <b>frequency</b> is increased (i.e. when these patterns are repeated more frequently), the pitch increases.
     </p>
     <div id="pitch-waveform"></div>
     <span class="envelope-slider-title">Explore Pitch</span>
@@ -140,7 +141,8 @@
   <div id="envelopes-tab" class="tabcontent">
     <h3>Envelopes</h3>
     <p>
-      An envelope describes how <b>volume</b> changes <b>over time</b>.
+      An envelope describes how <b>volume</b> changes <b>over time</b>
+      <abbr title="More generally, envelopes change signals over time. In this case, we have an amplitude envelope, but it could be changing frequencies or parameters of a filter (which we did not cover).">*</abbr>.
     </p>
     <p>
       There are a few parameters that define an envelope. Try changing them below and listen to how they change the volume of the notes played on the keyboard as you hold and release them.

@@ -105,7 +105,7 @@ main .sidebar {
     margin-bottom: 15px;
 }
 
-h2 {
+.title {
     position: relative;
     color: rgb(79, 0, 176, 0.5);
     margin-left: auto;
@@ -114,11 +114,17 @@ h2 {
     margin-bottom: 15px;
 }
 
-h2:after {
+.title:after {
     content: "Music Synthesis";
     position: absolute;
     left: 2px; top: 1px;
     color: rgb(216, 4, 222, 0.5);
 }
 
-/*# sourceMappingURL=https://uw-cse442-wi20.github.io/FP-music-synthesis/collapse.aac2e96b.css.map */
+.names {
+    position: relative;
+    margin: auto;
+    text-align: center;
+}
+
+/*# sourceMappingURL=https://uw-cse442-wi20.github.io/FP-music-synthesis/collapse.101d52ec.css.map */
