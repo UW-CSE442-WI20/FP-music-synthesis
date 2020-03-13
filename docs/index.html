@@ -11,7 +11,7 @@
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://uw-cse442-wi20.github.io/FP-music-synthesis/skeleton.4fb07215.css">
   <link rel="stylesheet" href="https://uw-cse442-wi20.github.io/FP-music-synthesis/collapse.aac2e96b.css">
-  <link rel="stylesheet" type="text/css" href="https://uw-cse442-wi20.github.io/FP-music-synthesis/envelope.5e8feca8.css">
+  <link rel="stylesheet" type="text/css" href="https://uw-cse442-wi20.github.io/FP-music-synthesis/envelope.cc6c9b2d.css">
   <link rel="stylesheet" type="text/css" href="https://uw-cse442-wi20.github.io/FP-music-synthesis/keyboard.2a54b1d4.css">
   <link rel="stylesheet" type="text/css" href="https://uw-cse442-wi20.github.io/FP-music-synthesis/synth.305538da.css">
   <link rel="stylesheet" type="text/css" href="https://uw-cse442-wi20.github.io/FP-music-synthesis/pitch.626223da.css">
@@ -145,38 +145,53 @@
     <p>
       There are a few parameters that define an envelope. Try changing them below and listen to how they change the volume of the notes played on the keyboard as you hold and release them.
     </p>
-    <div id="envelope-viz"></div>
-    <div id="envelope-sliders">
-      <span class="envelope-slider-title">Attack</span>
-      <select id="envelope-attack-select"></select>
-      <p class="envelope-param-description">
-	This controls how long it takes for a tone to reach full volume.
-      </p>
-      <div class="envelope-slider" id="envelope-attack-slider"></div>
-      <hr>
+    <center>
+      <div id="envelope-viz"></div>
+      <div id="envelope-sliders">
+	<div class="envelope-slider-container">
+	  <div class="envelope-slider-title">
+	    Attack
+	    <select id="envelope-attack-select"></select>
+	  </div>
+	  <p class="envelope-param-description">
+	    This controls how long it takes for a tone to reach full volume.
+	  </p>
+	  <div class="envelope-slider" id="envelope-attack-slider"></div>
+	</div>
 
-      <span class="envelope-slider-title">Decay</span>
-      <select id="envelope-decay-select"></select>
-      <p class="envelope-param-description">
-	This controls how long it takes for a tone to decrease to the sustain volume.
-      </p>
-      <div class="envelope-slider" id="envelope-decay-slider"></div>
-      <hr>
+	<div class="envelope-slider-container">
+	  <div class="envelope-slider-title">
+	    Sustain
+	  </div>
+	  <p class="envelope-param-description">
+	    This controls the volume a tone drops to after reaching full volume but before being released.
+	  </p>
+	  <div class="envelope-slider" id="envelope-sustain-slider"></div>
+	</div>
 
-      <span class="envelope-slider-title">Sustain</span>
-      <p class="envelope-param-description">
-	This controls the volume a tone drops to before being released.
-      </p>
-      <div class="envelope-slider" id="envelope-sustain-slider"></div>
-      <hr>
+	<div class="envelope-slider-container">
+	  <div class="envelope-slider-title">
+	    Decay
+	    <select id="envelope-decay-select"></select>
+	  </div>
+	  <p class="envelope-param-description">
+	    This controls how long it takes for a tone to decrease to the sustain volume.
+	  </p>
+	  <div class="envelope-slider" id="envelope-decay-slider"></div>
+	</div>
 
-      <span class="envelope-slider-title">Release</span>
-      <select id="envelope-release-select"></select>
-      <p class="envelope-param-description">
-	This controls how long the volume takes to fade out after a tone is released.
-      </p>
-      <div class="envelope-slider" id="envelope-release-slider"></div>
-    </div>
+	<div class="envelope-slider-container">
+	  <div class="envelope-slider-title">
+	    Release
+	    <select id="envelope-release-select"></select>
+	  </div>
+	  <p class="envelope-param-description">
+	    This controls how long the volume takes to fade out after a tone is released.
+	  </p>
+	  <div class="envelope-slider" id="envelope-release-slider"></div>
+	</div>
+      </div>
+    </center>
   </div>
 
   <div id="filters-tab" class="tabcontent">
@@ -187,7 +202,7 @@
 
 <div id="footer" style="height: 60px"></div>
 
-<script src="https://uw-cse442-wi20.github.io/FP-music-synthesis/src.35a5ac9f.js"></script>
+<script src="https://uw-cse442-wi20.github.io/FP-music-synthesis/src.4b4dc70c.js"></script>
 
 </body>
 
