@@ -4,7 +4,7 @@ import { sliderHorizontal } from 'd3-simple-slider';
 const sample_window = 100;
 const DEFAULT = 440;
 const width = 800;
-const height = 500;
+const height = 200;
 const margin = {
   top: 10,
   right: 10,
@@ -60,13 +60,12 @@ function updatePitch(pitch) {
     .attr('d', line);
 }
 
-/*********************/ 
-/*                   */
+/*********************/
 /*      Slider       */
 /*********************/
 var pitchSlider = sliderHorizontal()
-  .min(1)
-  .max(880)
+  .min(65.4) // C2
+  .max(880)  // A5
   .width(300)
   .displayValue(true)
   .tickFormat(d3.format('.1f'))
