@@ -1,8 +1,6 @@
+# Introduction to Music Synthesis
 
-
-# Final Project Starter template
-
-The starter code for creating interactive visualization prototypes.
+This tutorial introduces the basic theory and tools used to synthesize electronic instruments. View the website [here](https://uw-cse442-wi20.github.io/FP-music-synthesis/).
 
 ## Getting Started
 
@@ -20,12 +18,10 @@ You must have Node.js installed. I prefer to install it using [nvm](https://gith
 because it doesn't require sudo and makes upgrades easier, but you can also just get it directly from
 https://nodejs.org/en/.
 
-#### Install dependecies
+#### Install dependencies
 
 Once you've got `node`, run the command `npm install` in this project folder
 and it will install all of the project-specific dependencies (if you're curious open up `package.json` to see where these are listed).
-
-npm is the _node package manager_.
 
 ### Running the local dev server
 
@@ -35,24 +31,3 @@ To run the project locally, run `npm start` and it will be available at http://l
 
 Run `npm run build` and all of your assets will be compiled and placed into the `docs/` folder. Note
 that this command will overwrite the existing docs folder.
-
-Once pushed to GitHub, the output should be available at UW-CSE442-WI20.github.io/your-repo-name/
-
-
-## Other notes
-
-## Loading Data
-
-See [this guide](https://gist.github.com/mathisonian/46eed3e6102888ddf741829fbbe262ff). The Parcel static file plugin has been installed,
-so any files you put in the `static/` folder will be available over the network.
-
-### Using 3rd party libraries
-
-You are more than welcome to use open source packages such as D3.js, just make sure to cite these.
-
-To add a new one run `npm install --save <library-name>`, e.g. `npm install --save d3`. This will
-add the library locally so it is available for use in your JS files. It will also add `d3` to the
-list of dependencies in `package.json`.
-
-_Note that if you install a library your teammates will need to install it too. Once the dep is added
-to `package.json` simply running `npm install` in this directory will download the new dependency._
