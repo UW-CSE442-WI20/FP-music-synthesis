@@ -1,0 +1,53 @@
+svg {
+  font: 10px sans-serif;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis line {
+  shape-rendering: auto;
+}
+
+.line {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+#pitch-controls {
+  margin: auto;
+  text-align: center;
+}
+
+#pitch-tone-button {
+  font-size: 2em;
+  background-color: #f1f1f1;
+  margin: auto;
+  width: 400px;
+  height: 50px;
+  border: none;
+  outline: none;
+}
+
+#pitch-tone-button:before {
+  content: '\25BA';
+}
+
+#pitch-tone-button:hover {
+  background-color: #f4e5fa;
+  border: none;
+}
+
+#pitch-tone-button:active {
+  background-color: #f1f1f1;
+  outline: solid;
+  outline-color: #d176e4;
+  outline-width: 2px;
+}
+
+
+/*# sourceMappingURL=https://uw-cse442-wi20.github.io/FP-music-synthesis/pitch.626223da.css.map */

@@ -1,0 +1,74 @@
+#keyboard-root {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0 auto 10px auto;
+    display: flex;
+    position: relative;
+}
+
+#keyboard-black {
+    position: absolute;
+}
+
+.white {
+    background-color: white;
+    position: relative;
+    flex-grow: 1;
+    color: black;
+}
+.white:hover {
+    /*background-color: hsl(0, 0%, 95%);*/
+    background-color: rgb(151, 0, 203, 0.1);
+}
+.white.white-down {
+    background-color: rgb(151, 0, 203, 0.2);
+    box-shadow: 0 0 0 0 #CCC8;
+    top: 5px;
+}
+
+.black {
+    position: absolute;
+    background-color: black;
+    color: white;
+}
+.black:hover {
+    /*background-color: hsl(0, 0%, 15%);*/
+    background-color: rgb(111, 3, 133);
+}
+.black.black-down{
+    background-color: rgb(173, 4, 206);
+    box-shadow: 0 0 0 0 #CCC8;
+    top: 5px;
+}
+
+.key {
+    border: 1px solid #AAA8;
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 5px 0 0 #CCC8;
+    top: 0;
+    transition: top .1s, box-shadow .1s;
+}
+
+.label {
+    text-align: center;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    user-select: none;
+}
+
+#waveform-root {
+    fill: none;
+    stroke: black;
+    stroke-width: 1.5;
+    
+    margin: 0 auto 0 auto;
+}
+
+svg {
+    display: block;
+    margin: auto;
+}
+
+
+/*# sourceMappingURL=https://uw-cse442-wi20.github.io/FP-music-synthesis/keyboard.2a54b1d4.css.map */
