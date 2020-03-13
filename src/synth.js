@@ -94,8 +94,9 @@ volMute.on("click", function() {
   })
 
 module.exports = {
-    synth: synth,
-    setEnvelope: setEnvelope,
-    fft: fft,
-    waveform: waveform
+  synth: synth,
+  setEnvelope: setEnvelope,
+  fft: fft,
+  waveform: waveform,
+  volume: volume
 };

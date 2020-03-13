@@ -4,6 +4,7 @@ const keyboard = require("./keyboard.js");
 const envelope = require("./envelope.js");
 const midik = require("./midi.js");
 const soundwave = require("./soundwave.js");
+const pitch = require("./pitch.js");
 
 // Sidebar
 var mini = true;
