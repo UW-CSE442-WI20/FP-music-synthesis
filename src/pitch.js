@@ -1,7 +1,8 @@
 import * as d3 from 'd3';
 import { sliderHorizontal } from 'd3-simple-slider';
 
-const sample_window = 100;
+const sampleWindow = 100;
+const sampleStep = 0.5;
 const DEFAULT = 440;
 const width = 800;
 const height = 200;
@@ -15,13 +16,13 @@ const w = width - margin.right;
 const h = height - margin.top - margin.bottom;
 
 function generateSineData(freq) {
-  freq = freq / 100;
-  return d3.range(0, sample_window, 0.2).map(function(i) {
+  freq = freq / 1000;
+  return d3.range(0, sampleWindow, sampleStep).map(function(i) {
     return Math.sin(i * freq);
   });
 }
 
-const xScale = d3.scaleLinear().domain([0, sample_window - 1]).range([0, w]);
+const xScale = d3.scaleLinear().domain([0, sampleWindow / sampleStep]).range([0, w]);
 const yScale = d3.scaleLinear().domain([-1, 1]).range([h, 0]);
 const svg = d3.select('#pitch-waveform')
   .append('svg')
