@@ -1,0 +1,124 @@
+/*Sidebar*/
+.sidebar {
+    height: 100%;
+    width: 85px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #f1f1f1;
+    transition: 0.5s;
+    overflow-x: hidden;
+    padding-top: 35px;
+    white-space: nowrap;
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 22px;
+    color: #000000;
+    display: block;
+    cursor: pointer;
+}
+
+.sidebar a:hover {
+    background-color: rgb(151, 0, 203, 0.1);
+}
+
+main .sidebar {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.icon-text {
+    vertical-align: middle;
+    margin-left: 30px;
+}
+
+.sidebar img {
+    vertical-align: middle;
+}
+#main {
+    padding: 16px;
+    margin-left: 85px;
+    transition: margin-left 0.5s;
+}
+
+@media screen and (max-height: 450px) {
+    .sidebar {
+        padding-top: 15px;
+    }
+    .sidebar a {
+        font-size: 18px;
+    }
+}
+
+.tabcontent {
+    display: none;
+    margin-top: 15px;
+}
+
+/* Horizontal collapsible */
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+.active, .accordion:hover {
+    background-color: #ccc;
+}
+
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.accordion:after {
+    content: '\02795';
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2796";
+}
+
+#logo {
+    display: block;
+    margin-left: 105px;
+    margin-bottom: 15px;
+}
+
+h2 {
+    position: relative;
+    color: rgb(79, 0, 176, 0.5);
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    margin-bottom: 15px;
+}
+
+h2:after {
+    content: "Music Synthesis";
+    position: absolute;
+    left: 2px; top: 1px;
+    color: rgb(216, 4, 222, 0.5);
+}
+
+/*# sourceMappingURL=/collapse.af5e4c1c.css.map */
