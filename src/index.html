@@ -145,38 +145,53 @@
     <p>
       There are a few parameters that define an envelope. Try changing them below and listen to how they change the volume of the notes played on the keyboard as you hold and release them.
     </p>
-    <div id="envelope-viz"></div>
-    <div id="envelope-sliders">
-      <span class="envelope-slider-title">Attack</span>
-      <select id="envelope-attack-select"></select>
-      <p class="envelope-param-description">
-	This controls how long it takes for a tone to reach full volume.
-      </p>
-      <div class="envelope-slider" id="envelope-attack-slider"></div>
-      <hr>
+    <center>
+      <div id="envelope-viz"></div>
+      <div id="envelope-sliders">
+	<div class="envelope-slider-container">
+	  <div class="envelope-slider-title">
+	    Attack
+	    <select id="envelope-attack-select"></select>
+	  </div>
+	  <p class="envelope-param-description">
+	    This controls how long it takes for a tone to reach full volume.
+	  </p>
+	  <div class="envelope-slider" id="envelope-attack-slider"></div>
+	</div>
 
-      <span class="envelope-slider-title">Decay</span>
-      <select id="envelope-decay-select"></select>
-      <p class="envelope-param-description">
-	This controls how long it takes for a tone to decrease to the sustain volume.
-      </p>
-      <div class="envelope-slider" id="envelope-decay-slider"></div>
-      <hr>
+	<div class="envelope-slider-container">
+	  <div class="envelope-slider-title">
+	    Sustain
+	  </div>
+	  <p class="envelope-param-description">
+	    This controls the volume a tone drops to after reaching full volume but before being released.
+	  </p>
+	  <div class="envelope-slider" id="envelope-sustain-slider"></div>
+	</div>
 
-      <span class="envelope-slider-title">Sustain</span>
-      <p class="envelope-param-description">
-	This controls the volume a tone drops to before being released.
-      </p>
-      <div class="envelope-slider" id="envelope-sustain-slider"></div>
-      <hr>
+	<div class="envelope-slider-container">
+	  <div class="envelope-slider-title">
+	    Decay
+	    <select id="envelope-decay-select"></select>
+	  </div>
+	  <p class="envelope-param-description">
+	    This controls how long it takes for a tone to decrease to the sustain volume.
+	  </p>
+	  <div class="envelope-slider" id="envelope-decay-slider"></div>
+	</div>
 
-      <span class="envelope-slider-title">Release</span>
-      <select id="envelope-release-select"></select>
-      <p class="envelope-param-description">
-	This controls how long the volume takes to fade out after a tone is released.
-      </p>
-      <div class="envelope-slider" id="envelope-release-slider"></div>
-    </div>
+	<div class="envelope-slider-container">
+	  <div class="envelope-slider-title">
+	    Release
+	    <select id="envelope-release-select"></select>
+	  </div>
+	  <p class="envelope-param-description">
+	    This controls how long the volume takes to fade out after a tone is released.
+	  </p>
+	  <div class="envelope-slider" id="envelope-release-slider"></div>
+	</div>
+      </div>
+    </center>
   </div>
 
   <div id="filters-tab" class="tabcontent">

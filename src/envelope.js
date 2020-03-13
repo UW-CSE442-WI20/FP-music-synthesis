@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function() {
     .call(decaySlider);
 
   var sustainSlider = sliderHorizontal()
-      .min(0.01)
+      .min(0)
       .max(1)
       .width(sliderWidth)
       .displayValue(true)
