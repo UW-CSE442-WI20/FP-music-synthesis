@@ -5,9 +5,24 @@ import { sliderHorizontal } from 'd3-simple-slider';
 const synth = require("./synth.js");
 
 document.addEventListener("DOMContentLoaded", function() {
-  var sliderWidth = 300;
-  var sliderHeight = 75;
-  
+  const sliderWidth = 300;
+  const sliderHeight = 75;
+  const strokeWidth = 2;
+
+  const envl = new Tone.Envelope();
+
+  var margin = {top: 10, right: 30, bottom: 30, left: 60};
+  var width = 460 - margin.left - margin.right;
+  var height = 150 - margin.top - margin.bottom;
+
+  var svg = d3.select("#envelope-viz")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
   function getEnvelopeCurve(envl, callback) {
     const n = envl.attack + envl.decay + envl.release;
     const params = envl.get();
@@ -26,7 +41,21 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  function initEnvelopeCurve(envl) {
+  function updateDivideLine() {
+    var beforeRelease = envl.attack + envl.decay;
+    var fullTime = beforeRelease + envl.release;
+    var divideX = width * beforeRelease / fullTime;
+    svg.select("line")
+      .attr("x1", divideX)
+      .attr("y1", 0)
+      .attr("x2", divideX)
+      .attr("y2", height);
+    svg.select("text")
+      .attr("x", divideX + 5);
+  }
+
+  function initEnvelopeCurve() {
+    synth.setEnvelope(envl);
     getEnvelopeCurve(envl, function(points) {
       var x = d3.scaleLinear().domain([0, points.length]).range([0, width]);
       var y = d3.scaleLinear().domain([1, 0]).range([0, height]);
@@ -34,15 +63,29 @@ document.addEventListener("DOMContentLoaded", function() {
 	  .x((d, i) => x(i))
 	  .y(d => y(d))
 
+      // Draw envelope plot
       svg.append("path")
 	.attr("fill", "none")
 	.attr("stroke", "black")
-	.attr("stroke-width", 1.5)
+	.attr("stroke-width", strokeWidth)
 	.attr("d", line(points));
+
+      // Draw divide line between hold and release
+      svg.append("line")
+	.style("stroke", "#000")
+	.attr("stroke-width", strokeWidth)
+	.attr("opacity", 0.2)
+	.style("stroke-dasharray", ("3, 3"));
+    svg.append("text")
+      .attr("class", "x label")
+      .attr("text-anchor", "start")
+      .attr("y", 0)
+	.text(String.fromCharCode(0x2190) + " before release");
+      updateDivideLine();
     });
   }
 
-  function updateEnvelopeCurve(envl) {
+  function updateEnvelopeCurve() {
     synth.setEnvelope(envl);
     getEnvelopeCurve(envl, function(points) {
       var x = d3.scaleLinear().domain([0, points.length]).range([0, width]);
@@ -51,23 +94,11 @@ document.addEventListener("DOMContentLoaded", function() {
         .x((d, i) => x(i))
         .y(d => y(d))
       svg.selectAll("path")
-	      .attr("d", line(points));
+	.attr("d", line(points));
+
+      updateDivideLine()
     });
   }
-
-  var envl = new Tone.Envelope();
-
-  var margin = {top: 10, right: 30, bottom: 30, left: 60};
-  var width = 460 - margin.left - margin.right;
-  var height = 150 - margin.top - margin.bottom;
-
-  var svg = d3.select("#envelope-viz")
-      .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-      .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
 
   // Sliders
   var attackSlider = sliderHorizontal()
@@ -79,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function() {
       .default(envl.attack)
       .on('onchange', val => {
         envl.attack = val;
-        updateEnvelopeCurve(envl);
+        updateEnvelopeCurve();
       });
   d3.select('#envelope-attack-slider')
     .append('svg')
@@ -98,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function() {
       .default(envl.decay)
       .on('onchange', val => {
         envl.decay = val;
-        updateEnvelopeCurve(envl);
+        updateEnvelopeCurve();
       });
   d3.select('#envelope-decay-slider')
     .append('svg')
@@ -117,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function() {
       .default(envl.sustain)
       .on('onchange', val => {
         envl.sustain = val;
-        updateEnvelopeCurve(envl);
+        updateEnvelopeCurve();
       });
   d3.select('#envelope-sustain-slider')
     .append('svg')
@@ -136,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function() {
       .default(envl.release)
       .on('onchange', val => {
         envl.release = val;
-        updateEnvelopeCurve(envl);
+        updateEnvelopeCurve();
       });
   d3.select('#envelope-release-slider')
     .append('svg')
@@ -162,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var select = document.getElementById(id);
     select.addEventListener('change', function() {
       envl[attr] = select.value;
-      updateEnvelopeCurve(envl);
+      updateEnvelopeCurve();
     });
   }
 
@@ -204,5 +235,5 @@ document.addEventListener("DOMContentLoaded", function() {
     'releaseCurve'
   );
 
-  initEnvelopeCurve(envl)
+  initEnvelopeCurve()
 });
